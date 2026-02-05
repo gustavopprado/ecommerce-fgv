@@ -57,10 +57,6 @@ function AdminLoginPage({ onLogin }) {
             {loading ? 'Entrando...' : 'Entrar'}
           </button>
         </form>
-
-        <p className="hint">
-          Usuário padrão de teste: <strong>admin</strong> • Senha: <strong>Setav@*2025Painel</strong>
-        </p>
       </div>
     </div>
   );

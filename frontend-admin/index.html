@@ -2,12 +2,15 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/png" href="/logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>frontend-admin</title>
+    <title>Painel Admin</title>
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      window.API_URL = 'http://' + window.location.hostname + ':3001';
+    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

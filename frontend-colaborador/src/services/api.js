@@ -1,34 +1,35 @@
-// frontend-colaborador/src/services/api.js
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+const API_BASE_URL = `http://${window.location.hostname}:3001/api`;
 
-/**
- * Busca o catálogo mais recente de produtos.
- * GET /api/produtos
- */
+const api = axios.create({
+  baseURL: API_BASE_URL,
+});
+
 export async function getProdutos() {
-  const resp = await fetch(`${API_URL}/api/produtos`);
-  if (!resp.ok) {
-    throw new Error('Erro ao buscar produtos.');
-  }
-  return resp.json();
+  const resp = await api.get('/produtos');
+  return resp.data;
 }
 
-/**
- * Cria um novo pedido a partir dos dados do colaborador e dos itens do carrinho.
- * POST /api/pedidos
- */
+export async function getEmployeeDataByBadge(cracha) {
+  try {
+    const resp = await api.get(`/pedidos/employee/${cracha}`);
+    return resp.data;
+  } catch (error) {
+    throw new Error(error.response?.data?.error || 'Erro ao buscar dados do funcionário.');
+  }
+}
+
 export async function criarPedido(pedidoData) {
   try {
     console.log('Enviando pedido para o backend:', pedidoData);
-
-    const response = await axios.post(`${API_URL}/api/pedidos`, pedidoData);
-
+    const response = await api.post('/pedidos', pedidoData);
     console.log('Resposta do backend:', response.data);
     return response.data;
   } catch (error) {
     console.error('Erro ao criar pedido:', error.response || error.message || error);
-    throw new Error('Erro ao criar pedido');
+    throw new Error(error.response?.data?.error || 'Erro ao criar pedido');
   }
 }
+
+export default api;

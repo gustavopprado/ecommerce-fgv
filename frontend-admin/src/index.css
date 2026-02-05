@@ -639,18 +639,6 @@ p {
   color: #6d6e71;
 }
 
-/* linha verde sutil abaixo do header para reforçar identidade */
-.admin-header::after {
-  content: '';
-  display: block;
-  position: absolute;
-  left: 230px; /* largura da sidebar */
-  right: 0;
-  bottom: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #7bc258, #d8d9db);
-}
-
 /* CONTEÚDO DO ADMIN */
 
 .admin-content {
@@ -1029,4 +1017,149 @@ p {
   margin-top: 8px;
   font-size: 12px;
   color: var(--cinza-escuro);
+}
+
+/* --- Pedidos: tabela responsiva e ações --- */
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* Garante que a tabela use bem o espaço */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Evita que os textos fiquem encostados demais */
+.table th,
+.table td {
+  padding: 0.6rem 0.75rem;
+  font-size: 0.9rem;
+}
+
+/* Coluna de ações com largura fixa e sem quebrar linha dentro dela */
+.col-acoes {
+  width: 190px;
+  white-space: nowrap;
+}
+
+/* Container dos botões dentro da coluna de ações */
+.table-actions {
+  display: flex;
+  gap: 0.4rem;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+/* Botões menores na tabela */
+.table-actions .btn.btn-small {
+  font-size: 0.8rem;
+  padding: 0.35rem 0.6rem;
+}
+
+/* Select de status com largura razoável */
+.status-select {
+  padding: 0.25rem 0.4rem;
+  font-size: 0.85rem;
+  border-radius: 999px;
+}
+
+/* --- Tabela de pedidos --- */
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 0.6rem 0.75rem;
+  font-size: 0.9rem;
+  vertical-align: middle;
+}
+
+.col-acoes {
+  width: 190px;
+  white-space: nowrap;
+}
+
+.table-actions {
+  display: flex;
+  gap: 0.4rem;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.table-actions .btn.btn-small {
+  font-size: 0.8rem;
+  padding: 0.35rem 0.6rem;
+}
+
+.status-select {
+  padding: 0.25rem 0.4rem;
+  font-size: 0.85rem;
+  border-radius: 999px;
+}
+
+/* --- Modal de detalhes do pedido --- */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 1.5rem 1.75rem;
+  width: 90%;
+  max-width: 780px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.modal-header h3 {
+  margin: 0;
+}
+
+.modal-close-btn {
+  border: none;
+  background: transparent;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.modal-body p {
+  margin: 0.2rem 0;
+}
+
+.modal-body h4 {
+  margin-top: 1.2rem;
+  margin-bottom: 0.6rem;
+}
+
+.modal-footer {
+  margin-top: 1.2rem;
+  display: flex;
+  justify-content: flex-end;
 }

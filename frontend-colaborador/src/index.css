@@ -781,3 +781,177 @@ p {
   }
 }
 
+/* overlay full-screen */
+.overlay-resumo{
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  overflow: hidden;
+}
+
+/* Lottie fullscreen atrás */
+.overlay-bg{
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.overlay-bg > div{
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* camada escura (pra aparecer os fogos) */
+.overlay-resumo::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.18); /* aumenta p/ 0.22 se quiser mais escuro */
+  z-index: 1;
+}
+
+/* card em cima */
+.pedido-card--final{
+  position: relative;
+  z-index: 2;
+  width: min(920px, 100%);
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 18px 50px rgba(0,0,0,0.18);
+  padding: 22px 22px 18px;
+}
+
+/* header */
+.pedido-topbar{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+.pedido-nome{ margin: 0; font-size: 18px; font-weight: 700; }
+.pedido-sub{ margin: 4px 0 0; font-size: 13px; opacity: 0.75; }
+.pedido-parcelas{ font-size: 13px; opacity: 0.8; }
+
+/* itens */
+.pedido-sep{ margin: 12px 0; opacity: 0.35; }
+.pedido-itens{ display: grid; gap: 10px; }
+.pedido-item{
+  display: grid;
+  grid-template-columns: 140px 1fr 70px 140px;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.pedido-item:last-child{ border-bottom: none; }
+.pedido-cod{ font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; opacity: 0.8; }
+.pedido-desc{ font-size: 13px; }
+.pedido-qtd{ text-align: center; font-size: 13px; opacity: 0.8; }
+.pedido-valor{ text-align: right; font-weight: 600; }
+
+/* total */
+.pedido-total{
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding-top: 10px;
+  font-size: 15px;
+}
+
+/* ações dentro do card */
+.pedido-acoes{
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+/* botões usando --verde */
+.btn-primary{
+  background: var(--verde);
+  color: #fff;
+  border: 1px solid var(--verde);
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-primary:hover{ filter: brightness(0.95); }
+
+.btn-outline{
+  background: #fff;
+  color: var(--verde);
+  border: 1px solid var(--verde);
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-outline:hover{ background: rgba(0,0,0,0.03); }
+
+/* ========================= */
+/*        CARRINHO           */
+/* ========================= */
+
+/* ===== Carrinho (simples) ===== */
+
+.lista-carrinho--simple {
+  list-style: disc;
+  padding-left: 18px; /* bolinha discreta */
+  margin: 0;
+}
+
+.item-carrinho--simple {
+  padding: 10px 0 14px 0;
+  margin-bottom: 14px;
+  border-bottom: 1px solid rgba(123, 194, 88, 0.6); /* verde sutil */
+}
+
+.item-carrinho--simple:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.cart-row-simple {
+  margin-top: 8px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.cart-price-simple {
+  font-size: 13px;
+  flex: 1;
+  min-width: 200px;
+}
+
+.cart-actions-simple {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* controles de quantidade (mais leve) */
+.quantity-control {
+  display: inline-flex;
+  align-items: center;
+}
+
+.quantity-control input[type='number'] {
+  width: 52px;
+  height: 30px;
+  padding: 0;
+  text-align: center;
+  border-radius: 10px;
+  border: 1px solid var(--cinza-claro);
+  margin: 0 6px;
+}
+
+.quantity-control .button-secundario {
+  height: 30px;
+  padding: 4px 12px;
+}

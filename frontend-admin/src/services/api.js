@@ -1,69 +1,65 @@
 // frontend-admin/src/services/api.js
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+import axios from "axios";
 
-function authHeaders(token, isJson = true) {
-  const headers = {};
-  if (isJson) {
-    headers['Content-Type'] = 'application/json';
-  }
-  if (token) {
-    headers['Authorization'] = `Bearer ${token}`;
-  }
-  return headers;
+const API_BASE_URL = `http://${window.location.hostname}:3001/api`;
+
+const api = axios.create({
+  baseURL: API_BASE_URL,
+});
+
+function authHeaders(token, json = true) {
+  const h = {};
+  if (token) h.Authorization = `Bearer ${token}`;
+  if (json) h["Content-Type"] = "application/json";
+  return h;
 }
 
 export async function loginAdmin({ username, password }) {
-  const resp = await fetch(`${API_URL}/api/admin/login`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ username, password }),
-  });
-  const data = await resp.json();
-  if (!resp.ok) {
-    throw new Error(data.error || 'Erro ao autenticar.');
-  }
-  return data.token;
+  const resp = await api.post("/admin/login", { username, password });
+  return resp.data.token;
 }
 
 export async function getDashboardData(token) {
-  const resp = await fetch(`${API_URL}/api/admin/dashboard`, {
-    headers: authHeaders(token, false),
+  const resp = await api.get("/admin/dashboard", {
+    headers: { Authorization: `Bearer ${token}` },
   });
-  const data = await resp.json();
-  if (!resp.ok) {
-    throw new Error(data.error || 'Erro ao carregar dashboard.');
-  }
-  return data;
+  return resp.data;
 }
 
-export async function listarPedidos(token) {
-  const resp = await fetch(`${API_URL}/api/pedidos`, {
-    headers: authHeaders(token, false),
+export async function listarPedidos(token, filtros = {}) {
+  const params = {};
+  if (filtros.ano) params.ano = filtros.ano;
+  if (filtros.mes) params.mes = filtros.mes;
+  if (filtros.inicio) params.inicio = filtros.inicio;
+  if (filtros.fim) params.fim = filtros.fim;
+
+  const resp = await api.get("/pedidos", {
+    headers: { Authorization: `Bearer ${token}` },
+    params,
   });
-  const data = await resp.json();
-  if (!resp.ok) {
-    throw new Error(data.error || 'Erro ao listar pedidos.');
-  }
-  return data;
+  return resp.data;
 }
 
 export async function obterPedidoDetalhado(id, token) {
-  const resp = await fetch(`${API_URL}/api/pedidos/${id}`, {
-    headers: authHeaders(token, false),
+  const resp = await api.get(`/pedidos/${id}`, {
+    headers: { Authorization: `Bearer ${token}` },
   });
-  const data = await resp.json();
-  if (!resp.ok) {
-    throw new Error(data.error || 'Erro ao carregar detalhes do pedido.');
-  }
-  return data;
+  return resp.data;
+}
+
+export async function editarPedido(id, payload, token) {
+  const resp = await api.put(`/pedidos/${id}`, payload, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return resp.data;
 }
 
 export async function baixarFichaXlsx(id, token) {
-  const resp = await fetch(`${API_URL}/api/pedidos/${id}/xlsx`, {
+  const resp = await fetch(`${API_BASE_URL}/pedidos/${id}/xlsx`, {
     headers: authHeaders(token, false),
   });
   if (!resp.ok) {
-    let msg = 'Erro ao baixar ficha.';
+    let msg = "Erro ao baixar ficha.";
     try {
       const data = await resp.json();
       msg = data.error || msg;
@@ -72,7 +68,7 @@ export async function baixarFichaXlsx(id, token) {
   }
   const blob = await resp.blob();
   const url = window.URL.createObjectURL(blob);
-  const a = document.createElement('a');
+  const a = document.createElement("a");
   a.href = url;
   a.download = `ficha_pedido_${id}.xlsx`;
   document.body.appendChild(a);
@@ -82,11 +78,11 @@ export async function baixarFichaXlsx(id, token) {
 }
 
 export async function baixarRelatorioGeralPedidosXlsx(token) {
-  const resp = await fetch(`${API_URL}/api/admin/relatorios/pedidos-xlsx`, {
+  const resp = await fetch(`${API_BASE_URL}/admin/relatorios/pedidos-xlsx`, {
     headers: authHeaders(token, false),
   });
   if (!resp.ok) {
-    let msg = 'Erro ao baixar relatório.';
+    let msg = "Erro ao baixar relatório.";
     try {
       const data = await resp.json();
       msg = data.error || msg;
@@ -95,9 +91,9 @@ export async function baixarRelatorioGeralPedidosXlsx(token) {
   }
   const blob = await resp.blob();
   const url = window.URL.createObjectURL(blob);
-  const a = document.createElement('a');
+  const a = document.createElement("a");
   a.href = url;
-  a.download = 'relatorio_pedidos.xlsx';
+  a.download = "relatorio_pedidos.xlsx";
   document.body.appendChild(a);
   a.click();
   a.remove();
@@ -105,14 +101,25 @@ export async function baixarRelatorioGeralPedidosXlsx(token) {
 }
 
 export async function enviarRelatorioPedidosEmail(token) {
-  const resp = await fetch(`${API_URL}/api/admin/relatorios/pedidos-email`, {
-    method: 'POST',
+  const resp = await fetch(`${API_BASE_URL}/admin/relatorios/pedidos-email`, {
+    method: "POST",
     headers: authHeaders(token, true),
     body: JSON.stringify({}),
   });
   const data = await resp.json();
   if (!resp.ok) {
-    throw new Error(data.error || 'Erro ao enviar relatório por e-mail.');
+    throw new Error(data.error || "Erro ao enviar relatório por e-mail.");
   }
   return data;
 }
+
+export async function atualizarStatusPedido(id, status, token) {
+  const resp = await api.patch(
+    `/pedidos/${id}/status`,
+    { status },
+    { headers: { Authorization: `Bearer ${token}` } }
+  );
+  return resp.data;
+}
+
+export default api;

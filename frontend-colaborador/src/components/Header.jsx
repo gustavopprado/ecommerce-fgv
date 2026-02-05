@@ -18,7 +18,7 @@ const Header = () => {
           />
         </div>
         <div className="header-title">
-          <span>E-commerce Interno</span>
+          <span>Loja do Colaborador FGV</span>
           <span>
             “Escolha seus itens com rapidez e autorize o desconto em folha com
             segurança.”

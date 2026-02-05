@@ -1,0 +1,1010 @@
+[
+  {
+    "Crachá": 5625,
+    "Nome Completo": "ADELINA LOPES DE MELLO",
+    "Centro de Custo": 2253,
+    "Descrição Centro de Custo": "SEC-EMBALAGEM/082"
+  },
+  {
+    "Crachá": 5768,
+    "Nome Completo": "ADRYAN MOZER HEMPLES",
+    "Centro de Custo": 1600,
+    "Descrição Centro de Custo": "DEP-RECURSOS HUMANOS"
+  },
+  {
+    "Crachá": 5384,
+    "Nome Completo": "ALEXANDRA DOS SANTOS SILVA",
+    "Centro de Custo": 2257,
+    "Descrição Centro de Custo": "SECMOTT45-SECAO DE MONTAGEM TT45"
+  },
+  {
+    "Crachá": 5714,
+    "Nome Completo": "ALVARO LUIZ ROSE",
+    "Centro de Custo": 3101,
+    "Descrição Centro de Custo": "SET-VENDAS"
+  },
+  {
+    "Crachá": 5769,
+    "Nome Completo": "ANDRESSA CASARIN",
+    "Centro de Custo": 3101,
+    "Descrição Centro de Custo": "SET-VENDAS"
+  },
+  {
+    "Crachá": 21,
+    "Nome Completo": "ANTONIA P DA SILVA DA CRUZ",
+    "Centro de Custo": 1600,
+    "Descrição Centro de Custo": "DEP-RECURSOS HUMANOS"
+  },
+  {
+    "Crachá": 5594,
+    "Nome Completo": "ANTONIO ADEMIR DOS SANTOS",
+    "Centro de Custo": 2430,
+    "Descrição Centro de Custo": "SET-MANUTENCAO"
+  },
+  {
+    "Crachá": 5726,
+    "Nome Completo": "ANTONIO FRANCISCO",
+    "Centro de Custo": 1301,
+    "Descrição Centro de Custo": "SET-SEGURANCA DO TRABALHO"
+  },
+  {
+    "Crachá": 5100,
+    "Nome Completo": "ANTONIO JOSE DE BARROS",
+    "Centro de Custo": 2242,
+    "Descrição Centro de Custo": "SEC-PINTURA/TN"
+  },
+  {
+    "Crachá": 5700,
+    "Nome Completo": "ARIEL SANTOS LIMA",
+    "Centro de Custo": 1004,
+    "Descrição Centro de Custo": "DIRETORIA ADMINISTRATIVO/COMERCIAL"
+  },
+  {
+    "Crachá": 5667,
+    "Nome Completo": "ARTHUR GABRIEL M DA SILVA",
+    "Centro de Custo": 2243,
+    "Descrição Centro de Custo": "SEC-PINTURA/082"
+  },
+  {
+    "Crachá": 5755,
+    "Nome Completo": "ARTHUR SILVA CUNHA",
+    "Centro de Custo": 3104,
+    "Descrição Centro de Custo": "SET-EXPEDICAO"
+  },
+  {
+    "Crachá": 5661,
+    "Nome Completo": "BIANCA ISHIDA VALERIO",
+    "Centro de Custo": 2250,
+    "Descrição Centro de Custo": "SEC-MONTAGEM"
+  },
+  {
+    "Crachá": 5760,
+    "Nome Completo": "BRUNO AUGUSTO ROSA",
+    "Centro de Custo": 2250,
+    "Descrição Centro de Custo": "SEC-MONTAGEM"
+  },
+  {
+    "Crachá": 5737,
+    "Nome Completo": "BRUNO CESAR VIEIRA DA SILVA",
+    "Centro de Custo": 2902,
+    "Descrição Centro de Custo": "ACABAMENTO"
+  },
+  {
+    "Crachá": 5287,
+    "Nome Completo": "BRUNO RAFAEL R DOS SANTOS",
+    "Centro de Custo": 2243,
+    "Descrição Centro de Custo": "SEC-PINTURA/082"
+  },
+  {
+    "Crachá": 5491,
+    "Nome Completo": "BRUNO WILHAN ALVES DA CRUZ",
+    "Centro de Custo": 2257,
+    "Descrição Centro de Custo": "SECMOTT45-SECAO DE MONTAGEM TT45"
+  },
+  {
+    "Crachá": 613,
+    "Nome Completo": "CARLA HERMINIA SIMOES L PRADO",
+    "Centro de Custo": 1500,
+    "Descrição Centro de Custo": "DEP-FINANCEIRO"
+  },
+  {
+    "Crachá": 349,
+    "Nome Completo": "CARLOS LUCIANO MORAES SALDANHA",
+    "Centro de Custo": 1301,
+    "Descrição Centro de Custo": "SET-SEGURANCA DO TRABALHO"
+  },
+  {
+    "Crachá": 5347,
+    "Nome Completo": "CARLOS TOME",
+    "Centro de Custo": 1302,
+    "Descrição Centro de Custo": "SETOR DE ALMOXARIFADO"
+  },
+  {
+    "Crachá": 5323,
+    "Nome Completo": "CELIO ROGERIO DA SILVA",
+    "Centro de Custo": 3104,
+    "Descrição Centro de Custo": "SET-EXPEDICAO"
+  },
+  {
+    "Crachá": 522,
+    "Nome Completo": "CIRIA WUADEN",
+    "Centro de Custo": 3102,
+    "Descrição Centro de Custo": "SET-ADMINISTRATIVO DE VENDAS"
+  },
+  {
+    "Crachá": 5205,
+    "Nome Completo": "CLAUDECIR RODRIGUES DOS SANTOS",
+    "Centro de Custo": 3104,
+    "Descrição Centro de Custo": "SET-EXPEDICAO"
+  },
+  {
+    "Crachá": 5693,
+    "Nome Completo": "CRISTIANO SANTA BRIGIDA",
+    "Centro de Custo": 2252,
+    "Descrição Centro de Custo": "SEC-MONTAGEM/082"
+  },
+  {
+    "Crachá": 5643,
+    "Nome Completo": "DAIANA ROSA",
+    "Centro de Custo": 3300,
+    "Descrição Centro de Custo": "DEP-COMERCIO EXTERIOR"
+  },
+  {
+    "Crachá": 5335,
+    "Nome Completo": "DANIEL BORGES SAMPAIO",
+    "Centro de Custo": 2900,
+    "Descrição Centro de Custo": "PRODUCAO E PCP"
+  },
+  {
+    "Crachá": 5336,
+    "Nome Completo": "DAVID ARTHUR DA SILVA",
+    "Centro de Custo": 2420,
+    "Descrição Centro de Custo": "SET-FERRAMENTARIA"
+  },
+  {
+    "Crachá": 5371,
+    "Nome Completo": "DENISE DE SOUZA PINTO",
+    "Centro de Custo": 1700,
+    "Descrição Centro de Custo": "CONTROLADORIA"
+  },
+  {
+    "Crachá": 5657,
+    "Nome Completo": "DESIREE VENDRAME",
+    "Centro de Custo": 3101,
+    "Descrição Centro de Custo": "SET-VENDAS"
+  },
+  {
+    "Crachá": 5153,
+    "Nome Completo": "DIEGO ARISTIDES DOS SANTOS",
+    "Centro de Custo": 1100,
+    "Descrição Centro de Custo": "ASS-INFORMATICA"
+  },
+  {
+    "Crachá": 5679,
+    "Nome Completo": "DIEGO HENRIQUE MARTINS SOUSA",
+    "Centro de Custo": 2243,
+    "Descrição Centro de Custo": "SEC-PINTURA/082"
+  },
+  {
+    "Crachá": 582,
+    "Nome Completo": "DONIZETE DA SILVA NETO",
+    "Centro de Custo": 2233,
+    "Descrição Centro de Custo": "SEC-SOLDA"
+  },
+  {
+    "Crachá": 5742,
+    "Nome Completo": "DONIZETE FERNANDES DE FREITAS",
+    "Centro de Custo": 2250,
+    "Descrição Centro de Custo": "SEC-MONTAGEM"
+  },
+  {
+    "Crachá": 5062,
+    "Nome Completo": "EDEMIR ROBERIO P DOS ANJOS",
+    "Centro de Custo": 3104,
+    "Descrição Centro de Custo": "SET-EXPEDICAO"
+  },
+  {
+    "Crachá": 5466,
+    "Nome Completo": "ELEANDRO CORDEIRO SANTOS",
+    "Centro de Custo": 1302,
+    "Descrição Centro de Custo": "SETOR DE ALMOXARIFADO"
+  },
+  {
+    "Crachá": 5709,
+    "Nome Completo": "ELISANGELA PEREIRA DE OLIVEIRA",
+    "Centro de Custo": 1700,
+    "Descrição Centro de Custo": "CONTROLADORIA"
+  },
+  {
+    "Crachá": 947,
+    "Nome Completo": "ELISIANE ALVES SALDEIRA",
+    "Centro de Custo": 1700,
+    "Descrição Centro de Custo": "CONTROLADORIA"
+  },
+  {
+    "Crachá": 680,
+    "Nome Completo": "EVANDRO DINIZ DE ARAUJO",
+    "Centro de Custo": 1400,
+    "Descrição Centro de Custo": "DEP-SUPRIMENTO"
+  },
+  {
+    "Crachá": 5004,
+    "Nome Completo": "EVANDRO FRANCISCO GARCIA",
+    "Centro de Custo": 2241,
+    "Descrição Centro de Custo": "SEC-GALVANICA"
+  },
+  {
+    "Crachá": 5361,
+    "Nome Completo": "EVANDRO NOGUEIRA BORDIM",
+    "Centro de Custo": 1004,
+    "Descrição Centro de Custo": "DIRETORIA ADMINISTRATIVO/COMERCIAL"
+  },
+  {
+    "Crachá": 5754,
+    "Nome Completo": "EZEQUIEL DE SOUZA CORDEIRO",
+    "Centro de Custo": 2257,
+    "Descrição Centro de Custo": "SECMOTT45-SECAO DE MONTAGEM TT45"
+  },
+  {
+    "Crachá": 5750,
+    "Nome Completo": "FABIANO GONCALVES",
+    "Centro de Custo": 3101,
+    "Descrição Centro de Custo": "SET-VENDAS"
+  },
+  {
+    "Crachá": 5547,
+    "Nome Completo": "FABIO LIRA DA SILVA",
+    "Centro de Custo": 2250,
+    "Descrição Centro de Custo": "SEC-MONTAGEM"
+  },
+  {
+    "Crachá": 5771,
+    "Nome Completo": "FABIO PEDROSO SABATKE",
+    "Centro de Custo": 3104,
+    "Descrição Centro de Custo": "SET-EXPEDICAO"
+  },
+  {
+    "Crachá": 550,
+    "Nome Completo": "FABIO SACHSER",
+    "Centro de Custo": 2310,
+    "Descrição Centro de Custo": "SET-DESENVOLVIMENTO DE PRODUTO"
+  },
+  {
+    "Crachá": 5662,
+    "Nome Completo": "FABRICIO MACIEL DA SILVA",
+    "Centro de Custo": 2252,
+    "Descrição Centro de Custo": "SEC-MONTAGEM/082"
+  },
+  {
+    "Crachá": 5423,
+    "Nome Completo": "FELYPE RODRIGUES DE OLIVEIRA",
+    "Centro de Custo": 2241,
+    "Descrição Centro de Custo": "SEC-GALVANICA"
+  },
+  {
+    "Crachá": 5533,
+    "Nome Completo": "FRANCO DIMITRI FERREIRA",
+    "Centro de Custo": 2231,
+    "Descrição Centro de Custo": "SEC-ESTAMPARIA/TN"
+  },
+  {
+    "Crachá": 5749,
+    "Nome Completo": "GABRIEL PRCEBENIAK FERREIRA",
+    "Centro de Custo": 2210,
+    "Descrição Centro de Custo": "SET-PROGRAMACAO E CONTROLE DE PRODUCAO"
+  },
+  {
+    "Crachá": 5744,
+    "Nome Completo": "GABRIEL SCHMANSKI SCHMIDT",
+    "Centro de Custo": 1100,
+    "Descrição Centro de Custo": "ASS-INFORMATICA"
+  },
+  {
+    "Crachá": 5739,
+    "Nome Completo": "GEOVANA SAVANI DE OLIVEIRA",
+    "Centro de Custo": 2310,
+    "Descrição Centro de Custo": "SET-DESENVOLVIMENTO DE PRODUTO"
+  },
+  {
+    "Crachá": 5672,
+    "Nome Completo": "GEOVANE J WOICHICOSKI DE LARA",
+    "Centro de Custo": 2420,
+    "Descrição Centro de Custo": "SET-FERRAMENTARIA"
+  },
+  {
+    "Crachá": 5680,
+    "Nome Completo": "GERSON DIAS BATISTA",
+    "Centro de Custo": 2210,
+    "Descrição Centro de Custo": "SET-PROGRAMACAO E CONTROLE DE PRODUCAO"
+  },
+  {
+    "Crachá": 366,
+    "Nome Completo": "GERSON GONCALVES",
+    "Centro de Custo": 1600,
+    "Descrição Centro de Custo": "DEP-RECURSOS HUMANOS"
+  },
+  {
+    "Crachá": 5235,
+    "Nome Completo": "GESSI RODRIGUES DOS SANTOS",
+    "Centro de Custo": 2257,
+    "Descrição Centro de Custo": "SECMOTT45-SECAO DE MONTAGEM TT45"
+  },
+  {
+    "Crachá": 5329,
+    "Nome Completo": "GILSON FERREIRA DE LARA",
+    "Centro de Custo": 3104,
+    "Descrição Centro de Custo": "SET-EXPEDICAO"
+  },
+  {
+    "Crachá": 5330,
+    "Nome Completo": "GISELE MATOZO DE LARA TAUSCHEC",
+    "Centro de Custo": 3101,
+    "Descrição Centro de Custo": "SET-VENDAS"
+  },
+  {
+    "Crachá": 5713,
+    "Nome Completo": "GLERIE PEREIRA DE S  DA VEIGA",
+    "Centro de Custo": 3101,
+    "Descrição Centro de Custo": "SET-VENDAS"
+  },
+  {
+    "Crachá": 5376,
+    "Nome Completo": "GUILHERME CRISTO BOSSA",
+    "Centro de Custo": 2310,
+    "Descrição Centro de Custo": "SET-DESENVOLVIMENTO DE PRODUTO"
+  },
+  {
+    "Crachá": 5724,
+    "Nome Completo": "GUSTAVO DO PRADO PARTICA",
+    "Centro de Custo": 1100,
+    "Descrição Centro de Custo": "ASS-INFORMATICA"
+  },
+  {
+    "Crachá": 5705,
+    "Nome Completo": "HERBERT SADAYUKI HIRAYAMA",
+    "Centro de Custo": 2310,
+    "Descrição Centro de Custo": "SET-DESENVOLVIMENTO DE PRODUTO"
+  },
+  {
+    "Crachá": 109,
+    "Nome Completo": "ISMAEL CARDOSO",
+    "Centro de Custo": 2243,
+    "Descrição Centro de Custo": "SEC-PINTURA/082"
+  },
+  {
+    "Crachá": 112,
+    "Nome Completo": "JAELSON DA SILVA VIEIRA",
+    "Centro de Custo": 3104,
+    "Descrição Centro de Custo": "SET-EXPEDICAO"
+  },
+  {
+    "Crachá": 636,
+    "Nome Completo": "JAMIR ROMILDO DOS SANTOS MOURA",
+    "Centro de Custo": 1302,
+    "Descrição Centro de Custo": "SETOR DE ALMOXARIFADO"
+  },
+  {
+    "Crachá": 5198,
+    "Nome Completo": "JANETE DE OLIVEIRA DOS SANTOS",
+    "Centro de Custo": 2250,
+    "Descrição Centro de Custo": "SEC-MONTAGEM"
+  },
+  {
+    "Crachá": 5000,
+    "Nome Completo": "JARDEL JOSE RODRIGUES",
+    "Centro de Custo": 3102,
+    "Descrição Centro de Custo": "SET-ADMINISTRATIVO DE VENDAS"
+  },
+  {
+    "Crachá": 5636,
+    "Nome Completo": "JEFFERSON NOSETE",
+    "Centro de Custo": 2252,
+    "Descrição Centro de Custo": "SEC-MONTAGEM/082"
+  },
+  {
+    "Crachá": 5758,
+    "Nome Completo": "JOAO VICTOR FERNANDES",
+    "Centro de Custo": 3104,
+    "Descrição Centro de Custo": "SET-EXPEDICAO"
+  },
+  {
+    "Crachá": 5357,
+    "Nome Completo": "JOSE ROBERTO DOMANSKI",
+    "Centro de Custo": 2231,
+    "Descrição Centro de Custo": "SEC-ESTAMPARIA/TN"
+  },
+  {
+    "Crachá": 567,
+    "Nome Completo": "JOSIANE ALVES DE SOUZA",
+    "Centro de Custo": 1500,
+    "Descrição Centro de Custo": "DEP-FINANCEIRO"
+  },
+  {
+    "Crachá": 5756,
+    "Nome Completo": "JOSIANE CRISTINA NUNES",
+    "Centro de Custo": 2250,
+    "Descrição Centro de Custo": "SEC-MONTAGEM"
+  },
+  {
+    "Crachá": 5540,
+    "Nome Completo": "JOSIANI APARECIDA FERRAZ CENCI",
+    "Centro de Custo": 2257,
+    "Descrição Centro de Custo": "SECMOTT45-SECAO DE MONTAGEM TT45"
+  },
+  {
+    "Crachá": 5184,
+    "Nome Completo": "JOSUE ADEMIR FERRAZ DOS SANTOS",
+    "Centro de Custo": 2100,
+    "Descrição Centro de Custo": "ASS-CONTROLE DE QUALIDADE"
+  },
+  {
+    "Crachá": 5259,
+    "Nome Completo": "KARINNE M DE SOUZA MORAIS",
+    "Centro de Custo": 1500,
+    "Descrição Centro de Custo": "DEP-FINANCEIRO"
+  },
+  {
+    "Crachá": 5523,
+    "Nome Completo": "KAUAN TORRES RODRIGUES",
+    "Centro de Custo": 3216,
+    "Descrição Centro de Custo": "TREINAMENTOS"
+  },
+  {
+    "Crachá": 5762,
+    "Nome Completo": "KEVIN MICHAEL FELIX WILHELM",
+    "Centro de Custo": 2250,
+    "Descrição Centro de Custo": "SEC-MONTAGEM"
+  },
+  {
+    "Crachá": 5652,
+    "Nome Completo": "LAERCIO MONTESSO GONCALVES",
+    "Centro de Custo": 2420,
+    "Descrição Centro de Custo": "SET-FERRAMENTARIA"
+  },
+  {
+    "Crachá": 5618,
+    "Nome Completo": "LAERCIO PEREIRA DA S JUNIOR",
+    "Centro de Custo": 3104,
+    "Descrição Centro de Custo": "SET-EXPEDICAO"
+  },
+  {
+    "Crachá": 527,
+    "Nome Completo": "LAZARO APARECIDO DA SILVA",
+    "Centro de Custo": 2243,
+    "Descrição Centro de Custo": "SEC-PINTURA/082"
+  },
+  {
+    "Crachá": 5331,
+    "Nome Completo": "LETICIA APARECIDA CALDEIRA",
+    "Centro de Custo": 2420,
+    "Descrição Centro de Custo": "SET-FERRAMENTARIA"
+  },
+  {
+    "Crachá": 5682,
+    "Nome Completo": "LETICIA CHAIKOSKI",
+    "Centro de Custo": 1400,
+    "Descrição Centro de Custo": "DEP-SUPRIMENTO"
+  },
+  {
+    "Crachá": 5723,
+    "Nome Completo": "LETICIA GAGNO NADOLNY",
+    "Centro de Custo": 3200,
+    "Descrição Centro de Custo": "DEP-MARKETING"
+  },
+  {
+    "Crachá": 5732,
+    "Nome Completo": "LUCAS GARANHANI SALCEDO",
+    "Centro de Custo": 1700,
+    "Descrição Centro de Custo": "CONTROLADORIA"
+  },
+  {
+    "Crachá": 5676,
+    "Nome Completo": "LUCAS HENRIQUE ROGOSKI",
+    "Centro de Custo": 2430,
+    "Descrição Centro de Custo": "SET-MANUTENCAO"
+  },
+  {
+    "Crachá": 5665,
+    "Nome Completo": "LUCAS ZIZCYCKI CARNEIRO MENDES",
+    "Centro de Custo": 2258,
+    "Descrição Centro de Custo": "SECINJ-SETOR DE INJETORA PLASTICA"
+  },
+  {
+    "Crachá": 5597,
+    "Nome Completo": "LUCIANE MARIA MATTE",
+    "Centro de Custo": 1700,
+    "Descrição Centro de Custo": "CONTROLADORIA"
+  },
+  {
+    "Crachá": 5228,
+    "Nome Completo": "LUCIANO DA SILVA SANTOS",
+    "Centro de Custo": 2232,
+    "Descrição Centro de Custo": "SEC-ESTAMPARIA/082"
+  },
+  {
+    "Crachá": 5765,
+    "Nome Completo": "LUCIANO DE B PACHECO JUNIOR",
+    "Centro de Custo": 3101,
+    "Descrição Centro de Custo": "SET-VENDAS"
+  },
+  {
+    "Crachá": 751,
+    "Nome Completo": "LUCIANO RODRIGUES DA SILVA",
+    "Centro de Custo": 2310,
+    "Descrição Centro de Custo": "SET-DESENVOLVIMENTO DE PRODUTO"
+  },
+  {
+    "Crachá": 5716,
+    "Nome Completo": "LUCIEL GONCALVES MOREIRA",
+    "Centro de Custo": 2100,
+    "Descrição Centro de Custo": "ASS-CONTROLE DE QUALIDADE"
+  },
+  {
+    "Crachá": 716,
+    "Nome Completo": "LUCILDA DE F MACHADO OLIVEIRA",
+    "Centro de Custo": 3102,
+    "Descrição Centro de Custo": "SET-ADMINISTRATIVO DE VENDAS"
+  },
+  {
+    "Crachá": 97,
+    "Nome Completo": "LUCINEIA DE RAMOS G LASKAWSKI",
+    "Centro de Custo": 3102,
+    "Descrição Centro de Custo": "SET-ADMINISTRATIVO DE VENDAS"
+  },
+  {
+    "Crachá": 5375,
+    "Nome Completo": "LUCINEIA TRZINSKI GARCIA",
+    "Centro de Custo": 3200,
+    "Descrição Centro de Custo": "DEP-MARKETING"
+  },
+  {
+    "Crachá": 5398,
+    "Nome Completo": "LURDES TURKOT",
+    "Centro de Custo": 3300,
+    "Descrição Centro de Custo": "DEP-COMERCIO EXTERIOR"
+  },
+  {
+    "Crachá": 5704,
+    "Nome Completo": "MARCEL VITORINO DA SILVA",
+    "Centro de Custo": 3216,
+    "Descrição Centro de Custo": "TREINAMENTOS"
+  },
+  {
+    "Crachá": 273,
+    "Nome Completo": "MARCIA KOLTUM RAMOS",
+    "Centro de Custo": 1302,
+    "Descrição Centro de Custo": "SETOR DE ALMOXARIFADO"
+  },
+  {
+    "Crachá": 5607,
+    "Nome Completo": "MARCIEL CARDOSO DOS ANJOS",
+    "Centro de Custo": 2241,
+    "Descrição Centro de Custo": "SEC-GALVANICA"
+  },
+  {
+    "Crachá": 5166,
+    "Nome Completo": "MARCILENE M DE MIRANDA OTT",
+    "Centro de Custo": 2253,
+    "Descrição Centro de Custo": "SEC-EMBALAGEM/082"
+  },
+  {
+    "Crachá": 5492,
+    "Nome Completo": "MARCIO ALVES",
+    "Centro de Custo": 2257,
+    "Descrição Centro de Custo": "SECMOTT45-SECAO DE MONTAGEM TT45"
+  },
+  {
+    "Crachá": 5348,
+    "Nome Completo": "MARCIO GRZYBOWSKI DE LARA",
+    "Centro de Custo": 2100,
+    "Descrição Centro de Custo": "ASS-CONTROLE DE QUALIDADE"
+  },
+  {
+    "Crachá": 178,
+    "Nome Completo": "MARGARIDA MARIA SANTOS",
+    "Centro de Custo": 2250,
+    "Descrição Centro de Custo": "SEC-MONTAGEM"
+  },
+  {
+    "Crachá": 539,
+    "Nome Completo": "MARIA DE LOURDES FERREIRA",
+    "Centro de Custo": 2231,
+    "Descrição Centro de Custo": "SEC-ESTAMPARIA/TN"
+  },
+  {
+    "Crachá": 5717,
+    "Nome Completo": "MARIA MONICA DA SILVA",
+    "Centro de Custo": 3216,
+    "Descrição Centro de Custo": "TREINAMENTOS"
+  },
+  {
+    "Crachá": 5447,
+    "Nome Completo": "MARLI  ALVES",
+    "Centro de Custo": 2253,
+    "Descrição Centro de Custo": "SEC-EMBALAGEM/082"
+  },
+  {
+    "Crachá": 5669,
+    "Nome Completo": "MATHEUS CORTIANO VIEIRA LEITE",
+    "Centro de Custo": 2243,
+    "Descrição Centro de Custo": "SEC-PINTURA/082"
+  },
+  {
+    "Crachá": 5751,
+    "Nome Completo": "MATHEUS G RATAICZYK DA SILVA",
+    "Centro de Custo": 1302,
+    "Descrição Centro de Custo": "SETOR DE ALMOXARIFADO"
+  },
+  {
+    "Crachá": 5377,
+    "Nome Completo": "MATILDE APARECIDA LOPES",
+    "Centro de Custo": 2257,
+    "Descrição Centro de Custo": "SECMOTT45-SECAO DE MONTAGEM TT45"
+  },
+  {
+    "Crachá": 5555,
+    "Nome Completo": "MAURICIO BRUGUER",
+    "Centro de Custo": 2253,
+    "Descrição Centro de Custo": "SEC-EMBALAGEM/082"
+  },
+  {
+    "Crachá": 5337,
+    "Nome Completo": "MAURICIO CARNEIRO",
+    "Centro de Custo": 2100,
+    "Descrição Centro de Custo": "ASS-CONTROLE DE QUALIDADE"
+  },
+  {
+    "Crachá": 477,
+    "Nome Completo": "MOISES WINTER SOARES",
+    "Centro de Custo": 2310,
+    "Descrição Centro de Custo": "SET-DESENVOLVIMENTO DE PRODUTO"
+  },
+  {
+    "Crachá": 5722,
+    "Nome Completo": "NADIA MARILIA SIQUEIRA",
+    "Centro de Custo": 1400,
+    "Descrição Centro de Custo": "DEP-SUPRIMENTO"
+  },
+  {
+    "Crachá": 5481,
+    "Nome Completo": "NILSON ALVES DE SOUZA",
+    "Centro de Custo": 3104,
+    "Descrição Centro de Custo": "SET-EXPEDICAO"
+  },
+  {
+    "Crachá": 5353,
+    "Nome Completo": "NUBIA CRISTINA DA S SAMPAIO",
+    "Centro de Custo": 3102,
+    "Descrição Centro de Custo": "SET-ADMINISTRATIVO DE VENDAS"
+  },
+  {
+    "Crachá": 5702,
+    "Nome Completo": "ORALINO BORGES DOS SANTOS",
+    "Centro de Custo": 1301,
+    "Descrição Centro de Custo": "SET-SEGURANCA DO TRABALHO"
+  },
+  {
+    "Crachá": 5355,
+    "Nome Completo": "PAULO HONORATO ZORECK",
+    "Centro de Custo": 2400,
+    "Descrição Centro de Custo": "DEP-ENGENHARIA"
+  },
+  {
+    "Crachá": 5773,
+    "Nome Completo": "PEDRO AUGUSTO FLORINDO BECKER",
+    "Centro de Custo": 3102,
+    "Descrição Centro de Custo": "SET-ADMINISTRATIVO DE VENDAS"
+  },
+  {
+    "Crachá": 5748,
+    "Nome Completo": "PEDRO HENRIQUE MOTA DA SILVA",
+    "Centro de Custo": 1302,
+    "Descrição Centro de Custo": "SETOR DE ALMOXARIFADO"
+  },
+  {
+    "Crachá": 5763,
+    "Nome Completo": "POLIANY BORGES FERNANDES",
+    "Centro de Custo": 1700,
+    "Descrição Centro de Custo": "CONTROLADORIA"
+  },
+  {
+    "Crachá": 5550,
+    "Nome Completo": "RAFAEL CARLOS FRAGOSO",
+    "Centro de Custo": 3104,
+    "Descrição Centro de Custo": "SET-EXPEDICAO"
+  },
+  {
+    "Crachá": 5747,
+    "Nome Completo": "RAFAELLY MELLINGER",
+    "Centro de Custo": 2241,
+    "Descrição Centro de Custo": "SEC-GALVANICA"
+  },
+  {
+    "Crachá": 5174,
+    "Nome Completo": "RENATA LOPES FERRAZ CORDEIRO",
+    "Centro de Custo": 3300,
+    "Descrição Centro de Custo": "DEP-COMERCIO EXTERIOR"
+  },
+  {
+    "Crachá": 5735,
+    "Nome Completo": "RENATA R MENDES L DE SOUZA",
+    "Centro de Custo": 1700,
+    "Descrição Centro de Custo": "CONTROLADORIA"
+  },
+  {
+    "Crachá": 5654,
+    "Nome Completo": "RICARDO BUENO ALVES",
+    "Centro de Custo": 2210,
+    "Descrição Centro de Custo": "SET-PROGRAMACAO E CONTROLE DE PRODUCAO"
+  },
+  {
+    "Crachá": 5356,
+    "Nome Completo": "RICARDO CARVALHO VALERIO",
+    "Centro de Custo": 2233,
+    "Descrição Centro de Custo": "SEC-SOLDA"
+  },
+  {
+    "Crachá": 5344,
+    "Nome Completo": "RICARDO FERREIRA BRUSCHI",
+    "Centro de Custo": 1700,
+    "Descrição Centro de Custo": "CONTROLADORIA"
+  },
+  {
+    "Crachá": 5690,
+    "Nome Completo": "ROBERTO KOSSOSKI BELIZOTTI",
+    "Centro de Custo": 2320,
+    "Descrição Centro de Custo": "SETOR DE METODO E PROCESSO"
+  },
+  {
+    "Crachá": 5602,
+    "Nome Completo": "ROBERTO MASSAMBAN",
+    "Centro de Custo": 2250,
+    "Descrição Centro de Custo": "SEC-MONTAGEM"
+  },
+  {
+    "Crachá": 5308,
+    "Nome Completo": "ROBSON DE ALENCAR S SAVIOLI",
+    "Centro de Custo": 1100,
+    "Descrição Centro de Custo": "ASS-INFORMATICA"
+  },
+  {
+    "Crachá": 5731,
+    "Nome Completo": "ROGERIO APARECIDO DE ALMEIDA",
+    "Centro de Custo": 3102,
+    "Descrição Centro de Custo": "SET-ADMINISTRATIVO DE VENDAS"
+  },
+  {
+    "Crachá": 5421,
+    "Nome Completo": "ROGERIO STARON",
+    "Centro de Custo": 2904,
+    "Descrição Centro de Custo": "MANUTENCAO/FERRAMENTARIA"
+  },
+  {
+    "Crachá": 5753,
+    "Nome Completo": "RONALDO DOS SANTOS BUDNIK",
+    "Centro de Custo": 2100,
+    "Descrição Centro de Custo": "ASS-CONTROLE DE QUALIDADE"
+  },
+  {
+    "Crachá": 5446,
+    "Nome Completo": "ROSALINA VIAN",
+    "Centro de Custo": 2253,
+    "Descrição Centro de Custo": "SEC-EMBALAGEM/082"
+  },
+  {
+    "Crachá": 5407,
+    "Nome Completo": "ROSANGELA APARECIDA DA LUZ",
+    "Centro de Custo": 2250,
+    "Descrição Centro de Custo": "SEC-MONTAGEM"
+  },
+  {
+    "Crachá": 121,
+    "Nome Completo": "ROSANGELA BATISTA DA S IZIDORO",
+    "Centro de Custo": 2250,
+    "Descrição Centro de Custo": "SEC-MONTAGEM"
+  },
+  {
+    "Crachá": 569,
+    "Nome Completo": "ROSINEI PEREIRA DE OLIVEIRA",
+    "Centro de Custo": 2252,
+    "Descrição Centro de Custo": "SEC-MONTAGEM/082"
+  },
+  {
+    "Crachá": 5354,
+    "Nome Completo": "RUBENS FELIX DOS SANTOS",
+    "Centro de Custo": 2250,
+    "Descrição Centro de Custo": "SEC-MONTAGEM"
+  },
+  {
+    "Crachá": 419,
+    "Nome Completo": "SANDRA MACHADO NUNES",
+    "Centro de Custo": 1500,
+    "Descrição Centro de Custo": "DEP-FINANCEIRO"
+  },
+  {
+    "Crachá": 5736,
+    "Nome Completo": "SAVIO LUCIANO GOMES",
+    "Centro de Custo": 2258,
+    "Descrição Centro de Custo": "SECINJ-SETOR DE INJETORA PLASTICA"
+  },
+  {
+    "Crachá": 900,
+    "Nome Completo": "SCHEILA BORGES JULG",
+    "Centro de Custo": 2100,
+    "Descrição Centro de Custo": "ASS-CONTROLE DE QUALIDADE"
+  },
+  {
+    "Crachá": 469,
+    "Nome Completo": "SELMA BENTO FELIX",
+    "Centro de Custo": 2253,
+    "Descrição Centro de Custo": "SEC-EMBALAGEM/082"
+  },
+  {
+    "Crachá": 50,
+    "Nome Completo": "SERGIO AGOSTINHAK SCHMIDT",
+    "Centro de Custo": 2231,
+    "Descrição Centro de Custo": "SEC-ESTAMPARIA/TN"
+  },
+  {
+    "Crachá": 5307,
+    "Nome Completo": "SERGIO GASPAR GONCALVES",
+    "Centro de Custo": 3104,
+    "Descrição Centro de Custo": "SET-EXPEDICAO"
+  },
+  {
+    "Crachá": 5155,
+    "Nome Completo": "SERGIO ROBERTO DE OLIVEIRA",
+    "Centro de Custo": 2250,
+    "Descrição Centro de Custo": "SEC-MONTAGEM"
+  },
+  {
+    "Crachá": 5106,
+    "Nome Completo": "SILMAR CARLOS DA ROSA",
+    "Centro de Custo": 2901,
+    "Descrição Centro de Custo": "METALURGIA"
+  },
+  {
+    "Crachá": 5495,
+    "Nome Completo": "SILVIO DE MORAES NETO",
+    "Centro de Custo": 2256,
+    "Descrição Centro de Custo": "SECPE-SECAO DE PERFILADEIRAS"
+  },
+  {
+    "Crachá": 5670,
+    "Nome Completo": "SIMONE APARECIDA SOARES",
+    "Centro de Custo": 2253,
+    "Descrição Centro de Custo": "SEC-EMBALAGEM/082"
+  },
+  {
+    "Crachá": 5245,
+    "Nome Completo": "SIMONE DE LIMA SANTOS",
+    "Centro de Custo": 2256,
+    "Descrição Centro de Custo": "SECPE-SECAO DE PERFILADEIRAS"
+  },
+  {
+    "Crachá": 5081,
+    "Nome Completo": "SIMONE FREITAS DE PAULA",
+    "Centro de Custo": 1300,
+    "Descrição Centro de Custo": "DEP-ADMINISTRATIVO"
+  },
+  {
+    "Crachá": 785,
+    "Nome Completo": "SIRLENE FERREIRA DE MORAES",
+    "Centro de Custo": 2257,
+    "Descrição Centro de Custo": "SECMOTT45-SECAO DE MONTAGEM TT45"
+  },
+  {
+    "Crachá": 5068,
+    "Nome Completo": "SUSANNE GENTHNER",
+    "Centro de Custo": 1600,
+    "Descrição Centro de Custo": "DEP-RECURSOS HUMANOS"
+  },
+  {
+    "Crachá": 5334,
+    "Nome Completo": "TATIANA BURIGO",
+    "Centro de Custo": 3200,
+    "Descrição Centro de Custo": "DEP-MARKETING"
+  },
+  {
+    "Crachá": 5666,
+    "Nome Completo": "TATIANE DA SILVA",
+    "Centro de Custo": 2250,
+    "Descrição Centro de Custo": "SEC-MONTAGEM"
+  },
+  {
+    "Crachá": 5733,
+    "Nome Completo": "TECIANE GONCALVES FERREIRA",
+    "Centro de Custo": 2310,
+    "Descrição Centro de Custo": "SET-DESENVOLVIMENTO DE PRODUTO"
+  },
+  {
+    "Crachá": 5729,
+    "Nome Completo": "THAWANNY VIEIRA DA SILVA",
+    "Centro de Custo": 2420,
+    "Descrição Centro de Custo": "SET-FERRAMENTARIA"
+  },
+  {
+    "Crachá": 5770,
+    "Nome Completo": "THIAGO GONCALVES RAMOS",
+    "Centro de Custo": 3216,
+    "Descrição Centro de Custo": "TREINAMENTOS"
+  },
+  {
+    "Crachá": 5746,
+    "Nome Completo": "TISSY ALEX SANDER MORAES",
+    "Centro de Custo": 3200,
+    "Descrição Centro de Custo": "DEP-MARKETING"
+  },
+  {
+    "Crachá": 5253,
+    "Nome Completo": "VALDICEIA SOUZA DA CUNHA",
+    "Centro de Custo": 2250,
+    "Descrição Centro de Custo": "SEC-MONTAGEM"
+  },
+  {
+    "Crachá": 5202,
+    "Nome Completo": "VALMIR DE LARA DE SOUZA",
+    "Centro de Custo": 2430,
+    "Descrição Centro de Custo": "SET-MANUTENCAO"
+  },
+  {
+    "Crachá": 5740,
+    "Nome Completo": "VALQUIRIA FOIATTO BAUM",
+    "Centro de Custo": 2903,
+    "Descrição Centro de Custo": "MONTAGEM"
+  },
+  {
+    "Crachá": 5766,
+    "Nome Completo": "VANESSA CARLA DA CRUZ",
+    "Centro de Custo": 2310,
+    "Descrição Centro de Custo": "SET-DESENVOLVIMENTO DE PRODUTO"
+  },
+  {
+    "Crachá": 5401,
+    "Nome Completo": "VANUSSI BINOTTO CARNEIRO",
+    "Centro de Custo": 1500,
+    "Descrição Centro de Custo": "DEP-FINANCEIRO"
+  },
+  {
+    "Crachá": 5741,
+    "Nome Completo": "VICTOR FONTOURA TESTA",
+    "Centro de Custo": 2320,
+    "Descrição Centro de Custo": "SETOR DE METODO E PROCESSO"
+  },
+  {
+    "Crachá": 5711,
+    "Nome Completo": "VICTOR LOPES DE MELLO",
+    "Centro de Custo": 1100,
+    "Descrição Centro de Custo": "ASS-INFORMATICA"
+  },
+  {
+    "Crachá": 5264,
+    "Nome Completo": "VILSON CESAR DOS SANTOS",
+    "Centro de Custo": 2257,
+    "Descrição Centro de Custo": "SECMOTT45-SECAO DE MONTAGEM TT45"
+  },
+  {
+    "Crachá": 5710,
+    "Nome Completo": "VITOR HUGO TOMAZ MARTIN",
+    "Centro de Custo": 3104,
+    "Descrição Centro de Custo": "SET-EXPEDICAO"
+  },
+  {
+    "Crachá": 5526,
+    "Nome Completo": "WAGNER JOSE DA SILVA",
+    "Centro de Custo": 2243,
+    "Descrição Centro de Custo": "SEC-PINTURA/082"
+  },
+  {
+    "Crachá": 5745,
+    "Nome Completo": "WINICIUS CINTI",
+    "Centro de Custo": 2257,
+    "Descrição Centro de Custo": "SECMOTT45-SECAO DE MONTAGEM TT45"
+  },
+  {
+    "Crachá": 5286,
+    "Nome Completo": "ZILDO ZIPER  DA SILVA",
+    "Centro de Custo": 2250,
+    "Descrição Centro de Custo": "SEC-MONTAGEM"
+  }
+]
