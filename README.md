@@ -1,4 +1,4 @@
-# E-commerce FGV - Documentação Técnica Completa
+# Loja do Colaborador - Documentação Técnica Completa
 
 ## 📋 Índice
 
@@ -18,7 +18,7 @@
 
 ## 🎯 Visão Geral do Sistema
 
-O **E-commerce FGV** é um sistema de e-commerce interno desenvolvido para colaboradores da FGV Ferragens para Móveis. O sistema permite que colaboradores realizem pedidos de produtos através de uma interface web, enquanto administradores gerenciam pedidos, visualizam relatórios e exportam dados através de um painel administrativo.
+A **Loja do colaborador** é um sistema de e-commerce interno desenvolvido para colaboradores da FGV Ferragens para Móveis. O sistema permite que colaboradores realizem pedidos de produtos através de uma interface web, enquanto administradores gerenciam pedidos, visualizam relatórios e exportam dados através de um painel administrativo.
 
 ### Componentes do Sistema
 
@@ -1086,4 +1086,10 @@ Para dúvidas ou problemas, consulte:
 
 ---
 
-**Última atualização**: Fevereiro 2026
+## 📄 Licença
+
+[Especificar licença do projeto]
+
+---
+
+**Última atualização**: Fevereiro 2025
