@@ -1086,10 +1086,4 @@ Para dúvidas ou problemas, consulte:
 
 ---
 
-## 📄 Licença
-
-[Especificar licença do projeto]
-
----
-
-**Última atualização**: Fevereiro 2025
+**Última atualização**: Fevereiro 2026
