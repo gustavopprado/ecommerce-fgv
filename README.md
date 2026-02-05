@@ -18,7 +18,7 @@
 
 ## 🎯 Visão Geral do Sistema
 
-O **E-commerce FGV** é um sistema de e-commerce interno desenvolvido para colaboradores da FGV (Fundação Getulio Vargas). O sistema permite que colaboradores realizem pedidos de produtos através de uma interface web, enquanto administradores gerenciam pedidos, visualizam relatórios e exportam dados através de um painel administrativo.
+O **E-commerce FGV** é um sistema de e-commerce interno desenvolvido para colaboradores da FGV Ferragens para Móveis. O sistema permite que colaboradores realizem pedidos de produtos através de uma interface web, enquanto administradores gerenciam pedidos, visualizam relatórios e exportam dados através de um painel administrativo.
 
 ### Componentes do Sistema
 
