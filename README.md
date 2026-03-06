@@ -1,1095 +1,357 @@
-# Loja do Colaborador - Documentação Técnica Completa
+# Análise Técnica Completa — E-commerce Interno FGV
 
-## 📋 Índice
+## 1. Visão Geral do Projeto
 
-1. [Visão Geral do Sistema](#visão-geral-do-sistema)
-2. [Estrutura de Diretórios](#estrutura-de-diretórios)
-3. [Tecnologias Utilizadas](#tecnologias-utilizadas)
-4. [Arquitetura do Sistema](#arquitetura-do-sistema)
-5. [Modelo de Dados](#modelo-de-dados)
-6. [Fluxos Principais](#fluxos-principais)
-7. [Instalação e Configuração](#instalação-e-configuração)
-8. [Execução do Projeto](#execução-do-projeto)
-9. [Endpoints da API](#endpoints-da-api)
-10. [Segurança e Boas Práticas](#segurança-e-boas-práticas)
-11. [Produção](#produção)
+Este é um sistema web de **e-commerce interno** para a empresa FGV (FGV Terronorte), onde **colaboradores** fazem pedidos de produtos (materiais internos) e um **painel administrativo** gerencia tudo. O valor dos pedidos é descontado diretamente da folha salarial do funcionário.
 
----
+### Arquitetura Geral
 
-## 🎯 Visão Geral do Sistema
+O projeto segue uma arquitetura **monorepo com 3 módulos independentes**:
 
-A **Loja do colaborador** é um sistema de e-commerce interno desenvolvido para colaboradores da FGV Ferragens para Móveis. O sistema permite que colaboradores realizem pedidos de produtos através de uma interface web, enquanto administradores gerenciam pedidos, visualizam relatórios e exportam dados através de um painel administrativo.
+| Módulo | Tecnologia | Porta | Função |
+|--------|-----------|-------|--------|
+| `backend` | Node.js + Express | 3001 | API REST |
+| `frontend-colaborador` | React 19 + Vite 7 | 4173 | Loja para funcionários |
+| `frontend-admin` | React 19 + Vite 7 | 4174 | Painel administrativo |
 
-### Componentes do Sistema
-
-O projeto é composto por **três aplicações principais**:
-
-1. **Backend** (`backend/`): API REST desenvolvida em Node.js/Express
-   - Autenticação de administradores
-   - Gerenciamento de pedidos e produtos
-   - Integração com banco de dados MySQL
-   - Geração de planilhas Excel (XLSX)
-   - Envio de emails automáticos
-
-2. **Frontend Admin** (`frontend-admin/`): Painel administrativo em React/Vite
-   - Login de administradores
-   - Dashboard com estatísticas e métricas
-   - Gestão completa de pedidos (listar, filtrar, editar, exportar)
-
-3. **Frontend Colaborador** (`frontend-colaborador/`): Interface para colaboradores em React/Vite
-   - Consulta de catálogo de produtos
-   - Montagem de carrinho de compras
-   - Registro de pedidos com opções de parcelamento
-   - Visualização de confirmação de pedidos
-
-### Arquitetura de Comunicação
-
-```
-┌─────────────────────┐         HTTP/REST          ┌─────────────────────┐
-│  Frontend Admin     │ ──────────────────────────> │                    │
-│  (React + Vite)     │                             │                    │
-└─────────────────────┘                             │     Backend API    │
-                                                    │  (Node.js/Express) │
-┌─────────────────────┐                             │                    │
-│ Frontend Colaborador│ ──────────────────────────> │                    │
-│  (React + Vite)     │                             └─────────────────────┘
-└─────────────────────┘                                        │
-                                                               │
-                                                               ▼
-                                                      ┌─────────────────────┐
-                                                      │   MySQL Database    │
-                                                      └─────────────────────┘
-```
+O deploy em produção é orquestrado via **PM2** (`ecosystem.config.js`) com 3 processos Node separados.
 
 ---
 
-## 📁 Estrutura de Diretórios
+## 2. Backend — API REST
 
-### Raiz do Projeto
+### 2.1 Stack Tecnológica
 
-```
-ecommerce-fgv/
-├── backend/                    # API Node.js/Express
-├── frontend-admin/             # Painel administrativo React
-├── frontend-colaborador/       # Interface do colaborador React
-├── ecosystem.config.js         # Configuração PM2 para produção
-└── README.md                   # Este arquivo
-```
+- **Runtime:** Node.js com Express 4.22
+- **Banco de Dados:** MySQL (via `mysql2/promise` com connection pool)
+- **Autenticação:** JWT (`jsonwebtoken`)
+- **E-mail:** Nodemailer (SMTP/Gmail)
+- **Relatórios:** ExcelJS (geração de planilhas XLSX)
+- **Configuração:** dotenv
 
-### Backend (`backend/`)
+### 2.2 Estrutura de Diretórios
 
 ```
-backend/
-├── src/
-│   ├── server.js                      # Ponto de entrada da aplicação
-│   ├── config/
-│   │   └── db.js                      # Configuração do MySQL (pool de conexões)
-│   ├── controllers/
-│   │   ├── admin.controller.js        # Lógica de autenticação e dashboard admin
-│   │   ├── orders.controller.js       # Lógica de pedidos (CRUD, XLSX, emails)
-│   │   └── products.controller.js     # Lógica de produtos (listagem)
-│   ├── routes/
-│   │   ├── admin.routes.js            # Rotas /api/admin/*
-│   │   ├── orders.routes.js          # Rotas /api/pedidos/*
-│   │   └── products.routes.js         # Rotas /api/produtos
-│   ├── middlewares/
-│   │   └── authAdmin.js               # Middleware JWT para autenticação admin
-│   ├── utils/
-│   │   └── email.js                   # Utilitário para envio de emails (Nodemailer)
-│   ├── scripts/
-│   │   ├── importJson.js              # Script para importar produtos.json
-│   │   └── importFuncionariosJson.js  # Script para importar funcionários
-│   ├── data/
-│   │   ├── produtos.json              # Catálogo de produtos (JSON)
-│   │   └── infos_funcionarios_trim.json # Dados de funcionários
-│   └── templates/
-│       └── ficha_base.xlsx            # Template Excel para fichas de pedido
-├── .env                              # Variáveis de ambiente (não versionado)
-└── package.json                       # Dependências e scripts
+backend/src/
+├── server.js              # Entry point + configuração Express
+├── config/
+│   └── db.js              # Pool de conexão MySQL
+├── controllers/
+│   ├── admin.controller.js    # Login, dashboard, relatórios
+│   ├── orders.controller.js   # CRUD de pedidos completo
+│   └── products.controller.js # Listagem de catálogo
+├── routes/
+│   ├── admin.routes.js
+│   ├── orders.routes.js
+│   └── products.routes.js
+├── middlewares/
+│   └── authAdmin.js       # Middleware JWT para rotas protegidas
+├── utils/
+│   └── email.js           # Transporter SMTP reutilizável
+├── scripts/
+│   ├── importJson.js              # Importa catálogo de produtos
+│   └── importFuncionariosJson.js  # Importa base de funcionários
+├── templates/
+│   └── ficha_base.xlsx    # Template Excel para ficha de pedido
+└── data/
+    ├── produtos.json                 # ~10.736 linhas, catálogo completo
+    └── infos_funcionarios_trim.json  # ~1.009 linhas, base de funcionários
 ```
 
-**Principais Arquivos:**
+### 2.3 Mapa Completo de Rotas (API)
 
-- **`src/server.js`**: Configura o Express, middlewares globais (CORS, JSON), registra rotas e inicia o servidor na porta 3001 (ou definida em `.env`).
-- **`src/config/db.js`**: Configuração do pool de conexões MySQL usando `mysql2`.
-- **`src/controllers/admin.controller.js`**: Gerencia login, dashboard e relatórios administrativos.
-- **`src/controllers/orders.controller.js`**: Gerencia criação, listagem, edição e exportação de pedidos.
-- **`src/middlewares/authAdmin.js`**: Valida tokens JWT nas rotas protegidas.
+| Método | Rota | Auth | Função |
+|--------|------|------|--------|
+| `GET` | `/` | Não | Health check |
+| `GET` | `/api/produtos` | Não | Lista catálogo de produtos |
+| `POST` | `/api/pedidos` | Não | Cria novo pedido (colaborador) |
+| `GET` | `/api/pedidos/employee/:cracha` | Não | Busca funcionário por crachá |
+| `GET` | `/api/pedidos` | Admin | Lista pedidos com filtros |
+| `GET` | `/api/pedidos/:id` | Admin | Detalhes de um pedido |
+| `GET` | `/api/pedidos/:id/xlsx` | Admin | Gera ficha XLSX do pedido |
+| `PATCH` | `/api/pedidos/:id/status` | Admin | Atualiza status do pedido |
+| `PUT` | `/api/pedidos/:id` | Admin | Edita itens do pedido |
+| `POST` | `/api/admin/login` | Não | Login do admin (retorna JWT) |
+| `GET` | `/api/admin/dashboard` | Admin | Dados agregados do dashboard |
+| `GET` | `/api/admin/relatorios/pedidos-xlsx` | Admin | Relatório geral XLSX |
+| `POST` | `/api/admin/relatorios/pedidos-email` | Admin | Envia relatório por e-mail |
 
-### Frontend Admin (`frontend-admin/`)
+### 2.4 Modelo de Dados (MySQL)
 
-```
-frontend-admin/
-├── src/
-│   ├── main.jsx                  # Ponto de entrada React
-│   ├── App.jsx                   # Roteamento e gerenciamento de autenticação
-│   ├── pages/
-│   │   ├── AdminLoginPage.jsx    # Tela de login
-│   │   ├── DashboardPage.jsx     # Dashboard com estatísticas
-│   │   └── OrdersPage.jsx        # Listagem e gestão de pedidos
-│   ├── components/
-│   │   └── AdminHeader.jsx       # Cabeçalho com navegação
-│   └── services/
-│       └── api.js                # Cliente HTTP (Axios) para API
-├── public/
-│   └── logo.png
-└── package.json
-```
+Baseado nas queries SQL, o banco possui pelo menos 4 tabelas:
 
-### Frontend Colaborador (`frontend-colaborador/`)
+**`funcionarios`** — Funcionários que fizeram pedidos
+- `id` (PK, auto increment)
+- `nome`, `setor`, `cracha`
 
-```
-frontend-colaborador/
-├── src/
-│   ├── main.jsx                  # Ponto de entrada React
-│   ├── App.jsx                   # Roteamento simples
-│   ├── pages/
-│   │   └── EmployeeOrderPage.jsx # Página principal de pedidos
-│   ├── components/
-│   │   ├── Header.jsx            # Cabeçalho
-│   │   ├── ProductList.jsx       # Lista de produtos
-│   │   └── Cart.jsx              # Carrinho de compras
-│   ├── services/
-│   │   └── api.js                # Cliente HTTP (Axios)
-│   └── assets/
-│       └── success-animation.json # Animação Lottie
-├── public/
-│   ├── logo_fgv_ecomerce_novembro_2025.png
-│   └── Guia_de_Produtos_2025.pdf
-└── package.json
-```
+**`funcionarios_json`** — Base completa de funcionários (importada do JSON)
+- `cracha`, `nome_completo`, `centro_custo`, `descricao_centro_custo`
+
+**`pedidos`** — Pedidos realizados
+- `id` (PK), `funcionario_id` (FK), `data_pedido`, `valor_total`
+- `status` (Pendente/Concluido/Cancelado), `aceita_desconto`, `numero_parcelas`
+- `editado` (boolean), `editado_em` (datetime), `observacoes_edicao`
+- `valor_total_original` (salvo na primeira edição)
+
+**`itens_pedido`** — Itens de cada pedido
+- `pedido_id` (FK), `codigo_produto`, `descricao_produto`
+- `quantidade`, `preco_unitario`
+
+**`produtos_json`** — Catálogo armazenado como JSON
+- `id` (PK), `json_data` (TEXT/JSON com array completo de produtos)
+
+### 2.5 Regras de Negócio Implementadas
+
+1. **Parcelamento:** Pedidos abaixo de R$ 100 só permitem 1x. Máximo de 10 parcelas.
+2. **Upsert de funcionário:** Ao criar pedido, se o crachá já existe, atualiza nome/setor; caso contrário, insere novo registro.
+3. **Transações:** Criação e edição de pedidos usam `BEGIN/COMMIT/ROLLBACK` com `getConnection()`.
+4. **Edição de pedidos:** Salva `valor_total_original` na primeira edição (nunca sobrescreve), marca como editado, substitui todos os itens (DELETE + INSERT).
+5. **E-mails automáticos:** Dispara e-mail em background (fire-and-forget com `.catch()`) ao criar ou editar pedido, incluindo ficha XLSX em anexo.
+6. **Geração de ficha XLSX:** Usa um template Excel (`ficha_base.xlsx`) e preenche células específicas com dados do pedido.
+
+### 2.6 Autenticação e Segurança
+
+O sistema usa JWT com um middleware (`authAdmin.js`) que extrai o token do header `Authorization: Bearer <token>`.
+
+**Pontos de atenção de segurança:**
+
+- **Credenciais hardcoded:** O login admin usa usuário/senha fixos no código (`admin` / `Setav@*2025Painel`). Isso é marcado como "versão de teste".
+- **JWT Secret fraco:** O fallback é `"segredo_super_simples"` ou `"segredo_teste"`.
+- **Banco com senha `root/root`:** O `db.js` tem credenciais hardcoded sem usar variáveis de ambiente.
+- **CORS aberto:** `app.use(cors())` sem restrição de origens.
+- **Rotas sem rate limiting:** Nenhum mecanismo de proteção contra brute force.
+- **Log de credenciais:** O `loginAdmin` faz `console.log` do username e password recebidos.
+- **Sem validação de input sanitizada:** Vulnerável a ataques se dados não forem devidamente tratados antes de chegar ao SQL (embora use queries parametrizadas do mysql2, o que previne SQL Injection).
 
 ---
 
-## 🛠 Tecnologias Utilizadas
+## 3. Frontend Colaborador (Loja)
 
-### Backend
+### 3.1 Stack
 
-| Tecnologia | Versão | Propósito |
-|------------|--------|-----------|
-| **Node.js** | - | Runtime JavaScript |
-| **Express** | ^4.22.1 | Framework web |
-| **MySQL2** | ^3.15.3 | Driver MySQL (pool de conexões) |
-| **jsonwebtoken** | ^9.0.2 | Autenticação JWT |
-| **Nodemailer** | ^7.0.11 | Envio de emails |
-| **ExcelJS** | ^4.4.0 | Geração de planilhas Excel |
-| **CORS** | ^2.8.5 | Cross-Origin Resource Sharing |
-| **dotenv** | ^17.2.3 | Gerenciamento de variáveis de ambiente |
-| **Nodemon** | ^3.1.0 | Hot-reload em desenvolvimento |
+- React 19.2 com hooks
+- React Router DOM 7.9
+- Axios para HTTP
+- jsPDF + html2canvas para exportação de PDF
+- React Lottie para animação de sucesso
+- Vite 7.2 como bundler
 
-### Frontend Admin
+### 3.2 Estrutura
 
-| Tecnologia | Versão | Propósito |
-|------------|--------|-----------|
-| **React** | ^19.2.0 | Biblioteca UI |
-| **React DOM** | ^19.2.0 | Renderização React |
-| **React Router DOM** | ^7.9.6 | Roteamento |
-| **Axios** | ^1.13.2 | Cliente HTTP |
-| **Vite** | ^7.2.4 | Build tool e dev server |
-| **ESLint** | ^9.39.1 | Linter |
+```
+frontend-colaborador/src/
+├── App.jsx                    # Router simples (rota única "/")
+├── main.jsx                   # Entry point com StrictMode
+├── pages/
+│   └── EmployeeOrderPage.jsx  # Página principal (~300 linhas)
+├── components/
+│   ├── Header.jsx             # Logo + botão catálogo PDF
+│   ├── ProductList.jsx        # Busca e lista de produtos
+│   └── Cart.jsx               # Carrinho com parcelas e checkout
+├── services/
+│   └── api.js                 # Funções de chamada à API
+└── assets/
+    └── success-animation.json # Animação Lottie
+```
 
-### Frontend Colaborador
+### 3.3 Fluxo do Colaborador
 
-| Tecnologia | Versão | Propósito |
-|------------|--------|-----------|
-| **React** | ^19.2.0 | Biblioteca UI |
-| **React DOM** | ^19.2.0 | Renderização React |
-| **React Router DOM** | ^7.9.6 | Roteamento |
-| **Axios** | ^1.13.2 | Cliente HTTP |
-| **jsPDF** | ^3.0.4 | Geração de PDFs |
-| **html2canvas** | ^1.4.1 | Captura de tela para PDF |
-| **react-lottie** | ^1.2.10 | Animações Lottie |
-| **Vite** | ^7.2.4 | Build tool e dev server |
+1. **Identifica-se pelo crachá** → Sistema busca automaticamente nome e setor via API (`/api/pedidos/employee/:cracha`). Se não encontrado, permite preenchimento manual.
+2. **Busca produtos** → Filtro por código ou descrição (mínimo 2 caracteres). Produtos com preço R$ 0 são filtrados automaticamente.
+3. **Monta carrinho** → Adiciona/remove itens, ajusta quantidade.
+4. **Configura parcelamento** → Select de 1x a 10x (bloqueado em 1x se total < R$ 100).
+5. **Aceita desconto em folha** → Checkbox obrigatório de consentimento.
+6. **Confirma pedido** → POST para API, exibe tela de resumo com animação Lottie.
+7. **Exporta PDF** → Captura o resumo na tela via html2canvas e gera PDF com jsPDF.
 
-### Produção
+### 3.4 Detalhes Técnicos Relevantes
 
-- **PM2**: Gerenciamento de processos Node.js (configurado em `ecosystem.config.js`)
+- **API URL dinâmica:** Usa `window.location.hostname` para montar a base URL da API (porta 3001), permitindo funcionar em qualquer host sem configuração.
+- **Campos readOnly inteligentes:** Quando o crachá busca dados automaticamente, nome e setor ficam `readOnly`.
+- **Aviso de entregas:** Pedidos até terça são entregues na quinta da mesma semana; após, só na semana seguinte.
+- **Server de produção:** `server-colaborador.cjs` serve o build estático com Express e fallback para SPA.
 
 ---
 
-## 🏗 Arquitetura do Sistema
+## 4. Frontend Admin (Painel)
 
-### Fluxo de Requisição HTTP
+### 4.1 Stack
 
-#### Exemplo: Criar Pedido (Colaborador)
+Idêntica ao frontend-colaborador, exceto sem jsPDF/html2canvas/Lottie.
 
-1. **Frontend** (`EmployeeOrderPage.jsx`)
-   - Usuário preenche dados e adiciona produtos ao carrinho
-   - Submete formulário
+### 4.2 Estrutura
 
-2. **Service** (`api.js`)
-   - `criarPedido()` faz `POST /api/pedidos` via Axios
+```
+frontend-admin/src/
+├── App.jsx                  # Router com proteção de rotas
+├── main.jsx
+├── pages/
+│   ├── AdminLoginPage.jsx   # Tela de login
+│   ├── DashboardPage.jsx    # Métricas e gráficos (~200 linhas)
+│   └── OrdersPage.jsx       # Gestão de pedidos (~500 linhas)
+├── components/
+│   └── AdminHeader.jsx      # Navbar com links + logout
+└── services/
+    └── api.js               # Todas as chamadas à API admin
+```
 
-3. **Backend - Roteamento** (`orders.routes.js`)
-   - Rota: `POST /api/pedidos` → `criarPedido()`
+### 4.3 Sistema de Autenticação (Frontend)
 
-4. **Controller** (`orders.controller.js`)
-   - Valida dados (nome, setor, crachá, itens)
-   - Calcula total e valida parcelamento
-   - Inicia transação MySQL
+- Token JWT armazenado no `localStorage`.
+- `App.jsx` verifica na montagem se existe token salvo.
+- Rotas protegidas via redirect condicional (sem componente PrivateRoute dedicado).
+- Sem verificação de expiração do token no frontend.
 
-5. **Banco de Dados**
-   - Upsert em `funcionarios` (por crachá)
-   - INSERT em `pedidos`
-   - INSERT em `itens_pedido` (bulk)
-   - Commit da transação
+### 4.4 Dashboard
 
-6. **Email** (background)
-   - Gera ficha XLSX
-   - Envia email via Nodemailer
+Exibe métricas filtradas por **ano** e **mês**:
 
-7. **Resposta**
-   - Retorna JSON: `{ message, pedidoId, valorTotal }`
+- **Cards de métricas:** Total de pedidos, valor total, colaboradores únicos.
+- **Tabelas:** Pedidos por status, pedidos por mês, top 10 produtos.
+- **Cálculo inteligente:** Pedidos cancelados são excluídos das métricas no frontend (recalculados a partir da lista completa de pedidos).
 
-#### Exemplo: Listar Pedidos (Admin)
+### 4.5 Página de Pedidos
 
-1. **Frontend** (`OrdersPage.jsx`)
-   - Faz `GET /api/pedidos` com token Bearer
+Funcionalidades completas:
 
-2. **Middleware** (`authAdmin.js`)
-   - Valida JWT
-   - Adiciona `req.admin` ao request
+- **Filtros de período:** Data início/fim personalizada, atalhos "Últimos 7 dias", "Esta semana", "Período 15→15" (ciclo de folha de pagamento).
+- **Filtro por status:** Pendente, Concluído, Cancelado, Todos.
+- **Alteração de status:** Dropdown inline na tabela com atualização otimista (atualiza UI imediatamente, reverte em caso de erro).
+- **Modal de detalhes:** Exibe informações completas do pedido + itens.
+- **Modal de edição:** Permite alterar itens (código, descrição, quantidade, preço), adicionar/remover itens, com recálculo automático do total. Campo de observações para justificar a edição.
+- **Exportações:** Download de ficha individual (XLSX) ou relatório geral. Envio do relatório por e-mail.
+- **Badge "Editado":** Pedidos alterados são marcados visualmente.
 
-3. **Controller** (`orders.controller.js`)
-   - Constrói WHERE com filtros (ano/mês ou período)
-   - Query com JOIN `pedidos` + `funcionarios`
-   - Retorna lista de pedidos
+### 4.6 Funções da API (Frontend)
+
+O arquivo `services/api.js` expõe funções bem organizadas usando mix de **Axios** (para JSON) e **fetch nativo** (para download de binários como XLSX):
+
+- `loginAdmin`, `getDashboardData`, `listarPedidos`
+- `obterPedidoDetalhado`, `editarPedido`
+- `baixarFichaXlsx`, `baixarRelatorioGeralPedidosXlsx`
+- `enviarRelatorioPedidosEmail`, `atualizarStatusPedido`
 
 ---
 
-## 🗄 Modelo de Dados
+## 5. Deploy e Infraestrutura
 
-### Tabelas Principais
+### 5.1 PM2 (ecosystem.config.js)
 
-#### `funcionarios`
+Três processos gerenciados:
+1. `ecommerce-backend` → `backend/src/server.js`
+2. `ecommerce-colaborador` → `frontend-colaborador/server-colaborador.cjs`
+3. `ecommerce-admin` → `frontend-admin/server-admin.cjs`
 
-Armazena dados dos colaboradores da FGV.
+### 5.2 Servidores Estáticos (Produção)
 
-| Campo | Tipo | Descrição |
-|-------|------|-----------|
-| `id` | INT (PK) | Identificador único |
-| `nome` | VARCHAR | Nome completo do funcionário |
-| `setor` | VARCHAR | Setor de trabalho |
-| `cracha` | INT (UNIQUE) | Número do crachá (identificador único) |
+Ambos os frontends usam Express simples para servir builds estáticos com **fallback SPA** (qualquer rota retorna `index.html`).
 
-#### `pedidos`
-
-Armazena os pedidos realizados pelos colaboradores.
-
-| Campo | Tipo | Descrição |
-|-------|------|-----------|
-| `id` | INT (PK) | Identificador único do pedido |
-| `funcionario_id` | INT (FK) | Referência a `funcionarios.id` |
-| `data_pedido` | DATETIME | Data e hora da criação do pedido |
-| `valor_total` | DECIMAL(10,2) | Valor total do pedido |
-| `valor_total_original` | DECIMAL(10,2) | Valor original (para histórico em edições) |
-| `status` | ENUM | Status: `Pendente`, `Concluido`, `Cancelado` |
-| `aceita_desconto` | BOOLEAN | Se aceita desconto em folha |
-| `numero_parcelas` | INT | Número de parcelas (1-10) |
-| `editado` | BOOLEAN | Se o pedido foi editado |
-| `editado_em` | DATETIME | Data da última edição |
-| `observacoes_edicao` | TEXT | Observações sobre a edição |
-
-#### `itens_pedido`
-
-Armazena os itens de cada pedido.
-
-| Campo | Tipo | Descrição |
-|-------|------|-----------|
-| `id` | INT (PK) | Identificador único |
-| `pedido_id` | INT (FK) | Referência a `pedidos.id` |
-| `codigo_produto` | VARCHAR | Código do produto |
-| `descricao_produto` | VARCHAR | Descrição do produto |
-| `quantidade` | INT | Quantidade solicitada |
-| `preco_unitario` | DECIMAL(10,2) | Preço unitário do produto |
-
-#### `produtos_json`
-
-Armazena o catálogo completo de produtos em formato JSON.
-
-| Campo | Tipo | Descrição |
-|-------|------|-----------|
-| `id` | INT (PK) | Identificador único |
-| `json_data` | JSON/TEXT | Catálogo completo de produtos |
-
-#### `funcionarios_json`
-
-Armazena dados adicionais de funcionários importados de sistemas externos.
-
-| Campo | Tipo | Descrição |
-|-------|------|-----------|
-| `cracha` | INT (PK) | Número do crachá |
-| `nome_completo` | VARCHAR | Nome completo |
-| `centro_custo` | VARCHAR | Centro de custo |
-| `descricao_centro_custo` | VARCHAR | Descrição do centro de custo |
-
-### Relacionamentos
+### 5.3 Variáveis de Ambiente Necessárias
 
 ```
-funcionarios (1) ────< (N) pedidos
-pedidos (1) ────< (N) itens_pedido
-```
-
----
-
-## 🔄 Fluxos Principais
-
-### 1. Fluxo de Login (Admin)
-
-```
-1. Admin acessa frontend-admin (ex: http://localhost:5173)
-2. Preenche credenciais na AdminLoginPage
-3. Frontend chama POST /api/admin/login
-4. Backend valida credenciais (admin / Setav@*2025Painel)
-5. Gera JWT com expiração de 8h
-6. Retorna token ao frontend
-7. Frontend salva token no localStorage
-8. Redireciona para Dashboard
-9. Próximas requisições incluem Authorization: Bearer <token>
-10. Middleware authAdmin valida token antes de acessar controllers
-```
-
-### 2. Fluxo de Compra (Colaborador)
-
-```
-1. Colaborador acessa frontend-colaborador
-2. Informa crachá → GET /api/pedidos/employee/:cracha
-3. Carrega produtos → GET /api/produtos
-4. Adiciona produtos ao carrinho
-5. Preenche dados (parcelas, desconto em folha)
-6. Submete pedido → POST /api/pedidos
-7. Backend valida dados
-8. Calcula total e valida regras de parcelamento
-9. Inicia transação MySQL
-10. Upsert funcionário (garante existência)
-11. Insere pedido
-12. Insere itens do pedido
-13. Commit transação
-14. Gera ficha XLSX
-15. Envia email de notificação
-16. Retorna sucesso ao frontend
-17. Frontend exibe tela de confirmação com animação
-```
-
-### 3. Fluxo de Gestão de Pedidos (Admin)
-
-```
-1. Admin logado acessa OrdersPage
-2. Frontend chama GET /api/pedidos (com token)
-3. Middleware valida JWT
-4. Controller aplica filtros (ano, mês, status)
-5. Query com JOIN pedidos + funcionarios
-6. Retorna lista de pedidos
-7. Admin pode:
-   - Visualizar detalhes (GET /api/pedidos/:id)
-   - Editar pedido (PUT /api/pedidos/:id)
-   - Atualizar status (PATCH /api/pedidos/:id/status)
-   - Baixar ficha Excel (GET /api/pedidos/:id/xlsx)
-   - Gerar relatório geral (GET /api/admin/relatorios/pedidos-xlsx)
-   - Enviar relatório por email (POST /api/admin/relatorios/pedidos-email)
-```
-
-### 4. Fluxo de Dashboard Administrativo
-
-```
-1. Frontend chama GET /api/admin/dashboard?ano=YYYY&mes=MM
-2. Middleware valida JWT
-3. Controller aplica filtros de período
-4. Calcula métricas:
-   - Total de pedidos
-   - Valor total
-   - Colaboradores únicos
-   - Pedidos por status
-   - Distribuição mensal
-   - Top 10 produtos mais pedidos
-5. Retorna dados agregados
-6. Frontend exibe gráficos e cards no DashboardPage
-```
-
----
-
-## ⚙️ Instalação e Configuração
-
-### Pré-requisitos
-
-- **Node.js** (versão 18 ou superior)
-- **MySQL** (versão 5.7 ou superior, ou MariaDB 10.3+)
-- **npm** ou **yarn** (gerenciador de pacotes)
-
-### Passo 1: Clonar o Repositório
-
-```bash
-git clone <url-do-repositorio>
-cd ecommerce-fgv
-```
-
-### Passo 2: Configurar Banco de Dados
-
-1. Criar o banco de dados:
-
-```sql
-CREATE DATABASE ecommerce CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-```
-
-2. Criar as tabelas (execute os scripts SQL necessários ou use migrations se disponíveis).
-
-### Passo 3: Configurar Backend
-
-1. Navegar para o diretório do backend:
-
-```bash
-cd backend
-```
-
-2. Instalar dependências:
-
-```bash
-npm install
-```
-
-3. Criar arquivo `.env` na raiz do `backend/`:
-
-```env
-# Servidor
 PORT=3001
-
-# Banco de Dados MySQL
+JWT_SECRET=...
 DB_HOST=localhost
 DB_USER=root
-DB_PASSWORD=sua_senha_mysql
+DB_PASSWORD=root
 DB_NAME=ecommerce
-
-# JWT
-JWT_SECRET=seu_segredo_jwt_aqui_use_uma_string_aleatoria_forte
-
-# Email (SMTP)
-SMTP_USER=seu_email@gmail.com
-SMTP_PASS=sua_senha_de_app_do_gmail
-REPORT_EMAIL=destinatario@fgv.br
-```
-
-**Nota sobre Gmail**: Para usar Gmail como SMTP, você precisará:
-- Ativar autenticação de 2 fatores
-- Gerar uma "Senha de app" específica para este uso
-- Usar essa senha de app no campo `SMTP_PASS`
-
-4. Importar dados iniciais:
-
-```bash
-# Importar catálogo de produtos
-node src/scripts/importJson.js
-
-# Importar dados de funcionários
-node src/scripts/importFuncionariosJson.js
-```
-
-### Passo 4: Configurar Frontend Admin
-
-1. Navegar para o diretório:
-
-```bash
-cd ../frontend-admin
-```
-
-2. Instalar dependências:
-
-```bash
-npm install
-```
-
-3. (Opcional) Configurar variáveis de ambiente se necessário (ex: `VITE_API_URL`).
-
-### Passo 5: Configurar Frontend Colaborador
-
-1. Navegar para o diretório:
-
-```bash
-cd ../frontend-colaborador
-```
-
-2. Instalar dependências:
-
-```bash
-npm install
-```
-
-3. (Opcional) Configurar variáveis de ambiente se necessário.
-
----
-
-## 🚀 Execução do Projeto
-
-### Modo Desenvolvimento
-
-#### Backend
-
-```bash
-cd backend
-npm run dev
-```
-
-O backend estará disponível em `http://localhost:3001` (ou porta definida em `.env`).
-
-#### Frontend Admin
-
-```bash
-cd frontend-admin
-npm run dev
-```
-
-Acesse `http://localhost:5173` (ou porta indicada pelo Vite).
-
-#### Frontend Colaborador
-
-```bash
-cd frontend-colaborador
-npm run dev
-```
-
-Acesse `http://localhost:5173` (ou outra porta se o admin estiver rodando).
-
-**Nota**: O Vite pode automaticamente usar outra porta se 5173 estiver ocupada.
-
-### Modo Produção
-
-#### Build dos Frontends
-
-```bash
-# Frontend Admin
-cd frontend-admin
-npm run build
-
-# Frontend Colaborador
-cd frontend-colaborador
-npm run build
-```
-
-#### Executar com PM2
-
-1. Instalar PM2 globalmente:
-
-```bash
-npm install -g pm2
-```
-
-2. Na raiz do projeto, iniciar todas as aplicações:
-
-```bash
-pm2 start ecosystem.config.js
-```
-
-3. Verificar status:
-
-```bash
-pm2 status
-```
-
-4. Parar aplicações:
-
-```bash
-pm2 stop ecosystem.config.js
-```
-
-5. Ver logs:
-
-```bash
-pm2 logs
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER=email@gmail.com
+SMTP_PASS=app_password
+REPORT_EMAIL=destinatario@...
+REPORT_FROM="Requisições FGVTN"
+NEW_ORDER_EMAIL=notificacao@...
 ```
 
 ---
 
-## 📡 Endpoints da API
+## 6. Scripts de Importação de Dados
 
-### Autenticação Admin
+### 6.1 `importJson.js` — Catálogo de Produtos
 
-#### `POST /api/admin/login`
+Lê `produtos.json` (10.736 linhas, ~1.900 produtos) e insere como TEXT/JSON na tabela `produtos_json`. Cada importação cria um **novo registro** (versionamento implícito). O endpoint de listagem sempre busca o registro mais recente (`ORDER BY id DESC LIMIT 1`).
 
-Autentica um administrador e retorna um token JWT.
+### 6.2 `importFuncionariosJson.js` — Base de Funcionários
 
-**Body:**
-```json
-{
-  "username": "admin",
-  "password": "Setav@*2025Painel"
-}
-```
-
-**Resposta (200):**
-```json
-{
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-}
-```
-
-**Resposta (401):**
-```json
-{
-  "error": "Usuário ou senha inválidos."
-}
-```
+Lê `infos_funcionarios_trim.json`, faz `TRUNCATE` na tabela `funcionarios_json` e insere em batch. Campos mapeados: Crachá, Nome Completo, Centro de Custo, Descrição Centro de Custo.
 
 ---
 
-### Dashboard Admin
+## 7. Pontos Positivos do Projeto
 
-#### `GET /api/admin/dashboard`
-
-Retorna estatísticas do dashboard administrativo.
-
-**Headers:**
-```
-Authorization: Bearer <token>
-```
-
-**Query Parameters:**
-- `ano` (opcional): Ano para filtrar (ex: `2025`)
-- `mes` (opcional): Mês para filtrar (1-12)
-
-**Resposta (200):**
-```json
-{
-  "totais": {
-    "total_pedidos": 150,
-    "total_valor": 45000.50,
-    "total_colaboradores": 45
-  },
-  "pedidos_por_status": [
-    { "status": "Pendente", "total": 30 },
-    { "status": "Concluido", "total": 120 }
-  ],
-  "pedidos_por_mes": [
-    { "mes": "2025-01", "total": 50 },
-    { "mes": "2025-02", "total": 100 }
-  ],
-  "top_produtos": [
-    { "codigo": "PROD001", "descricao": "Produto A", "total_pedidos": 25 }
-  ]
-}
-```
+1. **Transações no banco:** Operações críticas (criar/editar pedidos) usam transações MySQL com rollback.
+2. **Separação clara de responsabilidades:** Controllers, routes e middlewares bem separados.
+3. **Queries parametrizadas:** Uso consistente de `?` placeholders, prevenindo SQL Injection.
+4. **Atualização otimista na UI:** Status de pedidos atualiza instantaneamente na tela.
+5. **Validações duplicadas:** Tanto frontend quanto backend validam regras de negócio (parcelas, campos obrigatórios).
+6. **Período 15→15:** Funcionalidade específica para o ciclo de folha de pagamento, mostrando entendimento do negócio.
+7. **Fire-and-forget para e-mails:** E-mails são disparados em background sem bloquear a resposta HTTP.
+8. **Histórico de edições:** Salva valor original, marca como editado, registra observações.
 
 ---
 
-### Produtos
+## 8. Problemas e Melhorias Recomendadas
 
-#### `GET /api/produtos`
+### 🔴 Críticos (Segurança)
 
-Retorna o catálogo completo de produtos.
+| # | Problema | Local | Recomendação |
+|---|---------|-------|-------------|
+| 1 | **Credenciais admin hardcoded** no código-fonte | `admin.controller.js` | Mover para banco de dados com senha hasheada (bcrypt) |
+| 2 | **JWT Secret fraco** como fallback | `authAdmin.js` | Obrigar via variável de ambiente, sem fallback |
+| 3 | **Banco com senha root/root** hardcoded | `db.js` | Usar variáveis de ambiente para todas as credenciais |
+| 4 | **Console.log de senhas** | `admin.controller.js` | Remover log de credenciais em produção |
+| 5 | **CORS totalmente aberto** | `server.js` | Restringir a origens específicas |
+| 6 | **Sem rate limiting** | `server.js` | Adicionar `express-rate-limit` |
+| 7 | **Sem HTTPS** | Infraestrutura | Usar Nginx como reverse proxy com SSL |
 
-**Resposta (200):**
-```json
-{
-  "produtos": [
-    {
-      "codigo": "PROD001",
-      "descricao": "Produto Exemplo",
-      "preco": 99.90,
-      "categoria": "Categoria A"
-    }
-  ]
-}
-```
+### 🟡 Médios (Qualidade de Código)
 
----
+| # | Problema | Recomendação |
+|---|---------|-------------|
+| 1 | `dotenv.config()` chamado 2 vezes no `server.js` | Remover a primeira chamada |
+| 2 | Dois transporters de e-mail diferentes (Gmail direto no controller + SMTP genérico no utils) | Unificar usando apenas `utils/email.js` |
+| 3 | `node_modules` incluído no ZIP (38MB) | Adicionar ao `.gitignore`, nunca versionar |
+| 4 | Sem `.env.example` | Criar arquivo de exemplo com todas as variáveis necessárias |
+| 5 | Dashboard faz 2 requests separados (dashboard + pedidos) para recalcular métricas | Calcular no backend excluindo cancelados |
+| 6 | Sem testes automatizados | Adicionar Jest/Vitest para backend e frontend |
+| 7 | Sem tratamento de token expirado no frontend | Interceptor Axios para redirect ao login quando 401 |
+| 8 | Estilos inline excessivos nos componentes React | Migrar para classes CSS ou Tailwind |
 
-### Pedidos
+### 🟢 Melhorias Futuras
 
-#### `POST /api/pedidos`
-
-Cria um novo pedido (endpoint público).
-
-**Body:**
-```json
-{
-  "nome": "João Silva",
-  "setor": "TI",
-  "cracha": 12345,
-  "itens": [
-    {
-      "codigo_produto": "PROD001",
-      "descricao_produto": "Produto A",
-      "quantidade": 2,
-      "preco_unitario": 99.90
-    }
-  ],
-  "numero_parcelas": 3,
-  "aceita_desconto": true
-}
-```
-
-**Resposta (201):**
-```json
-{
-  "message": "Pedido criado com sucesso",
-  "pedidoId": 123,
-  "valorTotal": 199.80
-}
-```
-
-#### `GET /api/pedidos`
-
-Lista pedidos (requer autenticação admin).
-
-**Headers:**
-```
-Authorization: Bearer <token>
-```
-
-**Query Parameters:**
-- `ano` (opcional): Filtrar por ano
-- `mes` (opcional): Filtrar por mês
-- `status` (opcional): Filtrar por status
-
-**Resposta (200):**
-```json
-{
-  "pedidos": [
-    {
-      "id": 123,
-      "data_pedido": "2025-02-05T10:30:00Z",
-      "valor_total": 199.80,
-      "status": "Pendente",
-      "funcionario": {
-        "nome": "João Silva",
-        "setor": "TI",
-        "cracha": 12345
-      }
-    }
-  ]
-}
-```
-
-#### `GET /api/pedidos/:id`
-
-Retorna detalhes de um pedido específico.
-
-**Headers:**
-```
-Authorization: Bearer <token>
-```
-
-**Resposta (200):**
-```json
-{
-  "pedido": {
-    "id": 123,
-    "data_pedido": "2025-02-05T10:30:00Z",
-    "valor_total": 199.80,
-    "status": "Pendente",
-    "numero_parcelas": 3,
-    "aceita_desconto": true,
-    "funcionario": {
-      "nome": "João Silva",
-      "setor": "TI",
-      "cracha": 12345
-    },
-    "itens": [
-      {
-        "codigo_produto": "PROD001",
-        "descricao_produto": "Produto A",
-        "quantidade": 2,
-        "preco_unitario": 99.90
-      }
-    ]
-  }
-}
-```
-
-#### `PUT /api/pedidos/:id`
-
-Edita um pedido existente.
-
-**Headers:**
-```
-Authorization: Bearer <token>
-```
-
-**Body:**
-```json
-{
-  "itens": [
-    {
-      "codigo_produto": "PROD002",
-      "descricao_produto": "Produto B",
-      "quantidade": 1,
-      "preco_unitario": 149.90
-    }
-  ],
-  "observacoes_edicao": "Pedido atualizado conforme solicitação"
-}
-```
-
-**Resposta (200):**
-```json
-{
-  "message": "Pedido atualizado com sucesso",
-  "pedidoId": 123
-}
-```
-
-#### `PATCH /api/pedidos/:id/status`
-
-Atualiza o status de um pedido.
-
-**Headers:**
-```
-Authorization: Bearer <token>
-```
-
-**Body:**
-```json
-{
-  "status": "Concluido"
-}
-```
-
-**Resposta (200):**
-```json
-{
-  "message": "Status atualizado com sucesso"
-}
-```
-
-#### `GET /api/pedidos/employee/:cracha`
-
-Busca dados de um funcionário pelo número do crachá (endpoint público).
-
-**Resposta (200):**
-```json
-{
-  "funcionario": {
-    "nome": "João Silva",
-    "setor": "TI",
-    "cracha": 12345
-  }
-}
-```
-
-#### `GET /api/pedidos/:id/xlsx`
-
-Gera e retorna a ficha Excel de um pedido.
-
-**Headers:**
-```
-Authorization: Bearer <token>
-```
-
-**Resposta (200):**
-- Content-Type: `application/vnd.openxmlformats-officedocument.spreadsheetml.sheet`
-- Arquivo XLSX para download
+| # | Sugestão |
+|---|---------|
+| 1 | Paginação na listagem de pedidos (atualmente carrega todos) |
+| 2 | Sistema de roles com múltiplos admins no banco |
+| 3 | Upload de catálogo via interface admin (não apenas via script) |
+| 4 | Logs estruturados (Winston/Pino) no lugar de `console.log/error` |
+| 5 | Dockerização com docker-compose (backend + MySQL + frontends) |
+| 6 | Gráficos visuais (Chart.js/Recharts) no dashboard |
+| 7 | Notificação em tempo real (WebSocket) quando novo pedido chega |
+| 8 | Migração para TypeScript para melhor manutenibilidade |
 
 ---
 
-### Relatórios Admin
+## 9. Métricas do Projeto
 
-#### `GET /api/admin/relatorios/pedidos-xlsx`
-
-Gera relatório geral de pedidos em formato XLSX.
-
-**Headers:**
-```
-Authorization: Bearer <token>
-```
-
-**Resposta (200):**
-- Arquivo XLSX com duas planilhas: "Pedidos" e "Itens"
-
-#### `POST /api/admin/relatorios/pedidos-email`
-
-Envia relatório de pedidos por email.
-
-**Headers:**
-```
-Authorization: Bearer <token>
-```
-
-**Resposta (200):**
-```json
-{
-  "message": "Relatório enviado por e-mail com sucesso."
-}
-```
+| Métrica | Valor |
+|---------|-------|
+| Total de arquivos fonte | ~25 (excluindo CSS e assets) |
+| Linhas de código (backend) | ~850 |
+| Linhas de código (frontend-admin) | ~950 |
+| Linhas de código (frontend-colaborador) | ~550 |
+| Dependências backend | 7 (production) + 1 (dev) |
+| Dependências frontend-admin | 4 (production) |
+| Dependências frontend-colaborador | 7 (production) |
+| Produtos no catálogo | ~1.900 itens |
+| Funcionários na base | ~200 registros |
+| Rotas da API | 13 endpoints |
 
 ---
 
-## 🔒 Segurança e Boas Práticas
+## 10. Conclusão
 
-### Autenticação
+O projeto é um sistema funcional e bem estruturado para seu propósito — um e-commerce interno de baixa/média complexidade. A separação em três módulos é limpa, as regras de negócio estão bem implementadas (parcelamento, desconto em folha, ciclo 15→15), e funcionalidades como geração de XLSX e envio de e-mails com anexo demonstram maturidade na solução.
 
-- **JWT**: Tokens expiram em 8 horas
-- **Credenciais Admin**: Atualmente hardcoded no código (`admin` / `Setav@*2025Painel`)
-  - **⚠️ Recomendação**: Migrar para tabela de usuários no banco de dados em produção
-
-### Validação de Dados
-
-- Validação de campos obrigatórios nos controllers
-- Sanitização de inputs para prevenir SQL Injection (uso de placeholders `?` nas queries)
-- Validação de tipos e formatos (parcelas, valores monetários)
-
-### CORS
-
-- Configurado para permitir todas as origens em desenvolvimento
-- **⚠️ Recomendação**: Restringir origens permitidas em produção
-
-### Variáveis de Ambiente
-
-- Credenciais sensíveis (JWT_SECRET, senhas de banco, SMTP) devem estar no `.env`
-- Arquivo `.env` não deve ser versionado (adicionar ao `.gitignore`)
-
-### Banco de Dados
-
-- Uso de transações para operações críticas (criação de pedidos)
-- Pool de conexões para otimizar performance
-- Queries parametrizadas para prevenir SQL Injection
-
-### Emails
-
-- Configuração SMTP segura (Gmail com senha de app)
-- Tratamento de erros no envio de emails
-
----
-
-## 🌐 Produção
-
-### Checklist de Deploy
-
-- [ ] Configurar variáveis de ambiente no servidor
-- [ ] Ajustar CORS para domínios específicos
-- [ ] Configurar HTTPS (SSL/TLS)
-- [ ] Migrar credenciais admin para banco de dados
-- [ ] Configurar backup automático do banco de dados
-- [ ] Configurar monitoramento e logs
-- [ ] Testar envio de emails em produção
-- [ ] Configurar domínios/subdomínios para frontends
-- [ ] Otimizar builds de produção (minificação, tree-shaking)
-- [ ] Configurar rate limiting na API (opcional)
-
-### PM2 Ecosystem
-
-O arquivo `ecosystem.config.js` configura o PM2 para gerenciar todas as aplicações:
-
-```javascript
-module.exports = {
-  apps: [
-    {
-      name: "ecommerce-backend",
-      cwd: "./backend",
-      script: "src/server.js",
-      interpreter: "node",
-      env: {
-        NODE_ENV: "production",
-      },
-    },
-    {
-      name: "ecommerce-colaborador",
-      cwd: "./frontend-colaborador",
-      script: "server-colaborador.cjs",
-      interpreter: "node",
-      env: {
-        NODE_ENV: "production",
-      },
-    },
-    {
-      name: "ecommerce-admin",
-      cwd: "./frontend-admin",
-      script: "server-admin.cjs",
-      interpreter: "node",
-      env: {
-        NODE_ENV: "production",
-      },
-    },
-  ],
-};
-```
-
-### Comandos PM2 Úteis
-
-```bash
-# Iniciar todas as aplicações
-pm2 start ecosystem.config.js
-
-# Ver status
-pm2 status
-
-# Ver logs
-pm2 logs
-
-# Parar todas
-pm2 stop ecosystem.config.js
-
-# Reiniciar todas
-pm2 restart ecosystem.config.js
-
-# Deletar todas
-pm2 delete ecosystem.config.js
-
-# Monitoramento em tempo real
-pm2 monit
-```
-
----
-
-## 📝 Scripts Úteis
-
-### Importação de Dados
-
-```bash
-# Importar produtos
-cd backend
-node src/scripts/importJson.js
-
-# Importar funcionários
-node src/scripts/importFuncionariosJson.js
-```
-
----
-
-## 🐛 Troubleshooting
-
-### Backend não inicia
-
-- Verificar se MySQL está rodando
-- Verificar credenciais no `.env`
-- Verificar se a porta 3001 está disponível
-
-### Erro de conexão com banco
-
-- Verificar se o banco `ecommerce` existe
-- Verificar usuário e senha do MySQL
-- Verificar se o MySQL aceita conexões de `localhost`
-
-### Frontend não conecta ao backend
-
-- Verificar se o backend está rodando
-- Verificar URL da API no código do frontend
-- Verificar CORS no backend
-
-### Erro de autenticação
-
-- Verificar se o token JWT está sendo enviado no header `Authorization`
-- Verificar se o token não expirou (8 horas)
-- Verificar `JWT_SECRET` no `.env`
-
-### Emails não são enviados
-
-- Verificar configurações SMTP no `.env`
-- Para Gmail: usar senha de app, não senha normal
-- Verificar logs do backend para erros específicos
-
----
-
-## 📞 Suporte
-
-Para dúvidas ou problemas, consulte:
-- Logs do backend: `pm2 logs ecommerce-backend`
-- Logs do frontend: console do navegador (F12)
-- Documentação das tecnologias utilizadas
-
----
-
-## 📄 Licença
-
-[Especificar licença do projeto]
-
----
-
-**Última atualização**: Fevereiro 2025
+Os principais pontos de atenção para um ambiente de produção real são a **segurança** (credenciais hardcoded, CORS aberto, sem rate limit) e a **escalabilidade** (sem paginação, sem cache, dashboard fazendo cálculos no frontend). Com as correções de segurança aplicadas e algumas refatorações, o sistema está pronto para uso corporativo interno.
